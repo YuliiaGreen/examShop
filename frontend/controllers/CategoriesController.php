@@ -67,13 +67,20 @@ class CategoriesController extends Controller
     public function actionView($id)
     {
         $id = Yii::$app->request->get('id');
-        $category = Categories::find()->where(['id' => $id])->one();
+        $category = Categories::find()->with('products')->where(['id' => $id])->one();
 //        print_r( $category);
 //        $model = new Categories;
-        $products = ProductsCategories::find()->where(['=', 'categories_id', $id])->all();
+//        $products = $category->products;
 //        print_r( $products);
+//        dd($products);
+//        $temp=[];
+//        $productsCategories = ProductsCategories::find()->where(['=', 'categories_id', $id])->all();
+//            foreach($productsCategories as $productCategory){
+//                $temp[]=Products::find()->where(['=','id',$productCategory->products_id])->one();
+//            }
+//            dd($temp);
         return $this->render('view', [
-            'products' => $products,
+//            'products' => $products,
             'model' => $category,
             'categories' => CategoriesSearch::getParentCategories(),
 

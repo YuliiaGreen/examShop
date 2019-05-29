@@ -27,8 +27,8 @@ use yii\widgets\DetailView;
 
 
     <?php
-    echo count($products);
-    foreach ($products as $product):
+    //    echo count($products);
+    foreach ($model->products as $product):
 //
         ?>
         <div class="col-xl-4 col-md-6">
@@ -41,7 +41,7 @@ use yii\widgets\DetailView;
                                 <div class="product_name"><a
                                             href="../products/view?id=<?= $product->id ?>"><?= $product->title ?></a>
                                 </div>
-                                <div class="product_category">In <a href="category.html">Cat</a></div>
+                                <div class="product_category"><?= $model->title ?> <a href="category.html">Cat</a></div>
                             </div>
                         </div>
                         <div class="ml-auto text-right">

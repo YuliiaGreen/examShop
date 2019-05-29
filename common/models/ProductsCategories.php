@@ -16,7 +16,7 @@ use Yii;
  */
 class ProductsCategories extends \yii\db\ActiveRecord
 {
-    protected static $id;
+//    protected static $id;
 
     /**
      * {@inheritdoc}
@@ -73,7 +73,7 @@ class ProductsCategories extends \yii\db\ActiveRecord
         $products = Products::find()->where(['id' => $id])->one();
 //        print_r( $category);
 //        $model = new Categories;
-//        $products=ProductsCategories::find()->where(['categories_id'=> $id])->all();
+        $products = ProductsCategories::find()->where(['categories_id' => $id])->all();
 //        print_r( $products);
         return $this->render('view', [
             'products' => $products,

@@ -46,9 +46,9 @@
     </select>
 </form>
 <!-- Products -->
-
-<div class="products">
-    <div class="container">
+<!---->
+<!--<div class="products">-->
+<!--    <div class="container">-->
         <div class="row products_bar_row">
             <div class="col">
                 <div class="products_bar d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-start justify-content-center">

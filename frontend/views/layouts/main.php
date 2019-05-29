@@ -25,9 +25,9 @@ AppAsset::register($this);
     <meta name="description" content="Little Closet template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .super_container_inner {
-            margin-top: 59px;
-        }
+        /*.super_container_inner {*/
+        /*    margin-top: 59px;*/
+        /*}*/
     </style>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -181,11 +181,11 @@ AppAsset::register($this);
                 <?= Alert::widget() ?>
 
                 <!--            <div class="row products_row">-->
-                <!--            --><?php //if (Yii::$app->session->hasFlash('success')): ?>
-                <div class="alert alert-success" role="alert">
-                    <!--                    --><? //= Yii::$app->session->getFlash('success'); ?>
+                <?php if (Yii::$app->session->hasFlash('success')): ?>
+                    <div class="alert alert-success" role="alert">
+                        <?= Yii::$app->session->getFlash('success'); ?>
                 </div>
-                <!--            --><?php //endif; ?>
+                <?php endif; ?>
                 <?php if (Yii::$app->session->hasFlash('error')): ?>
                     <div class="alert alert-danger" role="alert">
                         <?php echo Yii::$app->session->getFlash('error'); ?>
@@ -201,6 +201,7 @@ AppAsset::register($this);
             </div>
             <?= $content ?>
         </div>
+    </div>
         <!-- Footer -->
 
         <footer class="footer">
