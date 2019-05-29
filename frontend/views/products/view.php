@@ -125,9 +125,8 @@ use yii\helpers\Html;
                 <div class="col-lg-6 product_col">
                     <div class="product_info">
                         <div class="product_name"><?= $model->title ?></div>
-                        <!--							<div class="product_category">In <a href="category.html">-->
-                        <? //=$model->categories()?><!--</a></div>-->
-                        <!--							-->
+                        <div class="product_category">In <a href="category.html">
+                            </a>
                         <div class="product_price"><span><?= $model->price ?></span></div>
                         <div class="product_size">
 

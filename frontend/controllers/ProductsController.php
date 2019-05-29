@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Categories;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
