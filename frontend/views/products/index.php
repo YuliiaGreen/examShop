@@ -7,48 +7,68 @@
 /* @var $pageList */
 /* @var pag */
 ?>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap-4.1.2/bootstrap.min.css">
-<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="/css/category.css">
-<link rel="stylesheet" type="text/css" href="/css/category_responsive.css">
+<!--<link rel="stylesheet" type="text/css" href="/css/bootstrap-4.1.2/bootstrap.min.css">-->
+<!--<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+<!--<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">-->
+<!--<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">-->
+<!--<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">-->
+<!--<link rel="stylesheet" type="text/css" href="/css/category.css">-->
+<!--<link rel="stylesheet" type="text/css" href="/css/category_responsive.css">-->
 <!-- Home -->
 
-<div class="home">
-    <div class="home_container d-flex flex-column align-items-center justify-content-end">
-        <div class="home_content text-center">
-            <div class="home_title">Category Page</div>
-            <div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
-                <?php if (!empty($this->params['categoriesDropdown'])): ?>
-
-                    <ul class="d-flex flex-row align-items-start justify-content-start text-center">
-                        <?php foreach ($this->params['categoriesDropdown'] as $category): ?>
-                            <li>
-                                <a href="categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                    </li>
-                <?php endif;
-                ?>
-            </div>
-        </div>
-    </div>
-</div>
-<form action="" class="select-quantity-form">
-    <select name="quantities" id="">
-        <?php foreach ($pageList as $key): ?>
-            <option value="<?= $key ?>" <?php if ($key === $quantities) echo 'selected' ?>><?= $key ?></option>
-        <?php endforeach; ?>
-
-    </select>
-</form>
+<!--<div class="home">-->
+<!--    <div class="home_container d-flex flex-column align-items-center justify-content-end">-->
+<!--        <div class="home_content text-center">-->
+<!--            <div class="home_title">Category Page</div>-->
+<!--            <div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">-->
+<!--                --><?php //if (!empty($this->params['categoriesDropdown'])): ?>
+<!---->
+<!--                    <ul class="d-flex flex-row align-items-start justify-content-start text-center">-->
+<!--                        --><?php //foreach ($this->params['categoriesDropdown'] as $category): ?>
+<!--                            <li>-->
+<!--                                <a href="categories/view?id=--><? //= $category->id ?><!--">--><? //= $category->title ?><!--</a>-->
+<!--                            </li>-->
+<!--                        --><?php //endforeach; ?>
+<!--                    </ul>-->
+<!--                    </li>-->
+<!--                --><?php //endif;
+//                ?>
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<form action="" class="select-quantity-form">-->
+<!--    <select name="quantities" id="">-->
+<!--        --><?php //foreach ($pageList as $key): ?>
+<!--            <option value="--><? //= $key ?><!--" --><?php //if ($key === $quantities) echo 'selected' ?><!-->--><? //= $key ?><!--</option>-->
+<!--        --><?php //endforeach; ?>
+<!---->
+<!--    </select>-->
+<!--</form>-->
 <!-- Products -->
 <!---->
 <!--<div class="products">-->
 <!--    <div class="container">-->
+
+
+<div id="slides" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#slides" data-slide-to="0" class="active"></li>
+        <li data-target="#slides" data-slide-to="1"></li>
+        <li data-target="#slides" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+        <div class="carousel-item">
+            <img src="/images/slides1" alt="" class="active">
+        </div>
+        <div class="carousel-item">
+            <img src="/images/slides2" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="/images/slides3" alt="">
+        </div>
+    </div>
+</div>
         <div class="row products_bar_row">
             <div class="col">
                 <div class="products_bar d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-start justify-content-center">

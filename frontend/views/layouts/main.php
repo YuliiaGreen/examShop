@@ -1,7 +1,5 @@
 <?php
-
 /* @var $this \yii\web\View */
-
 /* @var $content string */
 
 use common\models\Categories;
@@ -11,350 +9,150 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
-
 //use Yii;
 
 AppAsset::register($this);
-?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Little Closet template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        /*.super_container_inner {*/
-        /*    margin-top: 59px;*/
-        /*}*/
-    </style>
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
 
-<div class="wrap">
-    <!-- Menu -->
+$this->beginPage() ?>
 
-    <div class="menu">
+    <!DOCTYPE html>
+    <html lang="<?= Yii::$app->language ?>">
 
-        <!-- Search -->
-        <div class="menu_search">
-            <form action="<?= \yii\helpers\Url::to('/site/search') ?>" id="menu_search_form" class="menu_search_form">
-                <input type="text" name="param" class="search_input" placeholder="Search Item" required="required">
-                <button class="menu_search_button"><img src="/images/search.png" alt=""></button>
-                <input type="submit">
-                <!--            </form>-->
-                <!--            <form action="#" id="menu_search_form" class="menu_search_form">-->
-                <!--                <input type="text" class="search_input" placeholder="Search Item" required="required">-->
-                <!--                <button class="menu_search_button"><img src="/images/search.png" alt=""></button>-->
-                <!--            </form>-->
-        </div>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?php $this->registerCsrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+        <link href="/css/style.css" rel="stylesheet">
+        <?php $this->head() ?>
+    </head>
+
+    <body>
+    <?php $this->beginBody() ?>
+    <header>
         <!-- Navigation -->
-        <div class="menu_nav">
-            <ul>
-                <li><a href="#">Головна</a></li>
-                <li><a href="#">Про нас</a></li>
-                <li><a href="#">Контакти</a></li>
-                <li><a href="#">Реєстрація</a></li>
-                <li><a href="#">Вхід</a></li>
-                <?php if (!empty($this->params['categoriesDropdown'])): ?>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown"
-                           id="dropdownMenuLink">Категорії</a>
-                        <ul class="dropdown-menu">
-                            <?php foreach ($this->params['categoriesDropdown'] as $category): ?>
-                                <li class="p-2">
-                                    <a href="categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
+
+        <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <div class="container-fluid">
+                <a href="<? Yii::$app->homeUrl ?>" class="navbar-brand overflow-hidden">
+                    <img src="/images/logo.png" style="height: 50px;" class="img-fluid rounded float-left"
+                         alt="Responsive image">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="<?= Yii::$app->homeUrl ?>">Головна</a>
                                 </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </li>
-                <?php endif; ?>
-            </ul>
-        </div>
-        <!-- Contact Info -->
-        <div class="menu_contact">
-            <div class="menu_phone d-flex flex-row align-items-center justify-content-start">
-                <div>
-                    <div><img src="/images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div>
-                </div>
-                <div>+38 099 999 99 99</div>
-            </div>
-            <div class="menu_social">
-                <ul class="menu_social_list d-flex flex-row align-items-start justify-content-start">
-                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="super_container">
-
-        <!-- Header -->
-
-        <header class="header">
-            <div class="header_overlay"></div>
-            <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                <div class="logo">
-                    <div class="d-flex flex-row align-items-center justify-content-start">
-                        <?= Html::a(Html::img('/images/logo_1.png', ['alt' => 'MyShopLogo']), [Yii::$app->homeUrl]); ?>
-                        <div><span class="shop-name"></span>My Shop</div>
-                    </div>
-                </div>
-                <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                <nav class="main_nav">
-                    <ul class="d-flex flex-row align-items-start justify-content-start">
-                        <li class="active"><a href="<?= Yii::$app->homeUrl ?>">Головна</a></li>
-                        <li><a href="#">Про нас</a></li>
-                        <li><a href="#">Контакти</a></li>
-
-                        <?php if (!empty($this->params['categoriesDropdown'])): ?>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown"
-                                   id="dropdownMenuLink">Категорії</a>
-                                <ul class="dropdown-menu">
-                                    <?php foreach ($this->params['categoriesDropdown'] as $category): ?>
-                                        <li>
-                                            <a href="categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </li>
-                        <?php endif; ?>
-
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Про нас</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Контакти</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= Yii::$app->homeUrl ?>site/login">Вхід</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Реєстрація</a>
+                        </li>
+                        <li class="dropdown  nav-item">
+                            <a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                               id="dropdownMenuLink">Категорії</a>
+                            <ul class="dropdown-menu">
+                                <?php foreach ($this->params['categoriesDropdown'] as $category): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                           href="categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
                     </ul>
-                </nav>
-                <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
-                    <!-- Search -->
-                    <div class="header_search">
-                        <form action="#" id="header_search_form">
-                            <input type="text" class="search_input" placeholder="Search Item" required="required">
-                            <button class="header_search_button"><img src="/images/search.png" alt=""></button>
-                        </form>
-                    </div>
-                    <!-- User -->
-                    <div class="user">
-                        <a href="site/login">
-                            <div><img src="/images/user.svg" alt="https://www.flaticon.com/authors/freepik">
-                                <div>1</div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- Cart -->
-                    <div class="cart">
-                        <a href="../cart" ">
-                        <div><img class="svg" src="/images/cart.svg" alt="https://www.flaticon.com/authors/freepik">
+                    <div class="menu_search navbar-nav ml-auto">
+                        <form action="<?= \yii\helpers\Url::to('/site/search') ?>" id="menu_search_form"
+                              class="menu_search_form">
+                            <input type="text" name="param" class="search_input" placeholder="Search Item"
+                                   required="required">
+                            <button type="submit" class="menu_search_button"><img src="/images/search.png" alt="">
+                            </button>
+                            <!--                                    <input type="submit">-->
                         </div>
-                        </a>
+
                     </div>
-                    <!--                    TODO  -->
-                    <!--                    <div class="cart">-->
-                    <!--                        --><? //= Html::a(Html::img('/images/cart.svg', ['alt'=>'https://www.flaticon.com/authors/freepik'],['class' => 'svg']),
-                    //                            ['cart/index'])?>
-                    <!--                    </div>-->
-                    <!-- Phone -->
-                    <div class="header_phone d-flex flex-row align-items-center justify-content-start">
-                        <div>
-                            <div><img src="/images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div>
-                        </div>
-                        <div>
-                            +38 099 999 99 99
-                        </div>
-                    </div>
+        </nav>
+    </header>
+
+    <?= $content ?>
+    <div class="connect">
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h2>JOIN</h2>
+                </div>
+                <div class="col-12 social padding">
+
+                    <a href=""><i class="fab fa-youtube"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                    <a href=""><i class="fab fa-telegram"></i></a>
+                    <a href=""><i class="fab fa-google"></i></a>
+
                 </div>
             </div>
-        </header>
-        <div class="super_container_inner">
-            <div class="super_overlay"></div>
-            <div class="container">
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
-                <?= Alert::widget() ?>
-
-                <!--            <div class="row products_row">-->
-                <?php if (Yii::$app->session->hasFlash('success')): ?>
-                    <div class="alert alert-success" role="alert">
-                        <?= Yii::$app->session->getFlash('success'); ?>
-                </div>
-                <?php endif; ?>
-                <?php if (Yii::$app->session->hasFlash('error')): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo Yii::$app->session->getFlash('error'); ?>
-                    </div>
-                <?php endif; ?>
-                <?php if (Yii::$app->session->hasFlash('notLog')): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo Yii::$app->session->getFlash('notLog'); ?>
-                    </div>
-                <?php endif; ?>
-                <!--            </div>-->
-
-            </div>
-            <?= $content ?>
         </div>
     </div>
-        <!-- Footer -->
-
-        <footer class="footer">
-            <div class="footer_content">
-                <div class="container">
-                    <div class="row">
-                        <!--                    <div class="row page_nav_row">-->
-                        <!--                        <div class="col">-->
-                        <!--                            <div class="page_nav">-->
-                        <!--                                <ul class="d-flex flex-row align-items-start justify-content-center">-->
-                        <!--                                    <li class="active"><a href="category.html">Women</a></li>-->
-                        <!--                                    <li><a href="category.html">Men</a></li>-->
-                        <!--                                    <li><a href="category.html">Kids</a></li>-->
-                        <!--                                    <li><a href="category.html">Home Deco</a></li>-->
-                        <!--                                </ul>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
-                        <!-- About -->
-                        <div class="col-lg-4 footer_col">
-                            <div class="footer_about">
-                                <div class="footer_logo">
-                                    <a href="#">
-                                        <div class="d-flex flex-row align-items-center justify-content-start">
-                                            <div class="footer_logo_icon"><img src="/images/logo_2.png" alt=""></div>
-                                            <div>Little Closet</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="footer_about_text">
-                                    <p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                        mus. Suspendisse potenti. Fusce venenatis vel velit vel euismod.</p>
-                                </div>
-                            </div>
+    <footer>
+        <!--                -->
+        <div class="container-fluid padding">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <hr class="light">
+                    <p style="overflow: hidden;" class="top-cover center-block">
+                        <a href="<? Yii::$app->homeUrl ?>">
+                            <img src="/images/logo.png" style="height: 100px" class="img-fluid rounded"
+                                 alt="Responsive image">
+                        </a>
+                    </p>
+                    <hr class="light">
+                </div>
+                <div class="col-md-4">
+                    <!--                            <img src="/images/logo.png" alt="">-->
+                    <hr class="light">
+                    <p> Our Hours</p>
+                    <hr class="light">
+                    <p>Monday</p>
+                    <p>Tuesday</p>
+                    <p>Wednesday</p>
+                    <p>Thursday</p>
                         </div>
-
-                        <!-- Footer Links -->
-                        <div class="col-lg-4 footer_col">
-                            <div class="footer_menu">
-                                <div class="footer_title">Support</div>
-                                <ul class="footer_list">
-                                    <li>
-                                        <a href="#">
-                                            <div>Customer Service
-                                                <div class="footer_tag_1">online now</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div>Return Policy</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div>Size Guide
-                                                <div class="footer_tag_2">recommended</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div>Terms and Conditions</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div>Contact</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Footer Contact -->
-                        <div class="col-lg-4 footer_col">
-                            <div class="footer_contact">
-                                <div class="footer_title">Stay in Touch</div>
-                                <div class="newsletter">
-                                    <form action="#" id="newsletter_form" class="newsletter_form">
-                                        <input type="email" class="newsletter_input"
-                                               placeholder="Subscribe to our Newsletter" required="required">
-                                        <button class="newsletter_button">+</button>
-                                    </form>
-                                </div>
-                                <div class="footer_social">
-                                    <div class="footer_title">Social</div>
-                                    <ul class="footer_social_list d-flex flex-row align-items-start justify-content-start">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-4">
+                    <hr class="light">
+                    <p>Details</p>
+                    <hr class="light">
+                    <p>+30 000 00 00</p>
+                    <p>examShop@gmail.com</p>
+                    <p>100 Street Name</p>
+                    <p>Lutsk, Volyn region</p>
+                </div>
+                <div class="col-12">
+                    <hr class="light">
+                    <h5> Yulia Maxymchuk 2019</h5>
                 </div>
             </div>
-            <div class="footer_bar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="footer_bar_content d-flex flex-md-row flex-column align-items-center justify-content-start">
-                                <div class="copyright order-md-1 order-2">
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                                    All rights reserved | This template is made with <i class="fa fa-heart-o"
-                                                                                        aria-hidden="true"></i> by <a
-                                            href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                </div>
-                                <nav class="footer_nav ml-md-auto order-md-2 order-1">
-                                    <ul class="d-flex flex-row align-items-center justify-content-start">
-                                        <li><a href="category.html">Women</a></li>
-                                        <li><a href="category.html">Men</a></li>
-                                        <li><a href="category.html">Kids</a></li>
-                                        <li><a href="category.html">Home Deco</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </footer>
-        <script>
-            window.onload = function () {
-                $('.addProdToCart').on('click', function (ev) {
-                    ev.preventDefault();
-                    // console.log('clicked');
-                    $.get('/cart/add-product?id=' + this.dataset.id, function (message) {
-                        // console.log('status');
-                        // console.log(message);
 
+    </footer>
 
-                        if (message.status == 'error') {
-                            $('.alert.alert-danger').html('Product can not be added to the cart');
-                        } else {
-                            $('.alert.alert-success').html('Product added to the cart');
-                        }
-                    })
-                })
-
-
-                $('.select-quantity-form').on('change', function () {
-                    $('.select-quantity-form').submit();
-                })
-            }
-            //</script>
-        <?php $this->endBody() ?>
-
-</body>
-</html>
+    <?php $this->endBody() ?>
+    </body>
+    </html>
 <?php $this->endPage() ?>
