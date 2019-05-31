@@ -7,7 +7,7 @@ html, body {
     font-family: 'Poppins', sans-serif;
     color: #222;
     margin: auto;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 header {
@@ -115,12 +115,33 @@ header {
     color: #d5d5d5;
 }
 
+.map-container-4 {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+
+.map-container-4 iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
 footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
     background-color: #3f3f3f;
     color: #f2f8ff;
     padding-top: 2rem;
+    /*clear: both;*/
 }
 
+main {
+    clear: both;
+}
 
 /*---Media Queries --*/
 @media (max-width: 992px) {

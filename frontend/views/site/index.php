@@ -3,6 +3,7 @@
 /*@var $categories - список категорій дропдауном*/
 
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
 
 $this->params['categoriesDropdown'] = $categories;
 ?>
@@ -57,151 +58,68 @@ $this->params['categoriesDropdown'] = $categories;
 </div>
 <!--/three column section-->
 
-<div class="d-flex align-items-center justify-content-center">
+<div class="container-fluid padding text-center">
+    <div class="row text-center padding align-content-between">
+        <?php foreach ($products
+
+        as $product): ?>
+        <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto flex-wrap">
+            <!--<div class="overflow-auto pos-absolute">-->
     <!--<div class="row text-center padding align-content-between">-->
-    <div class="col-xs-12 col-sm-6 col-md-4 m-auto justify-content-center align-self-center">
-        <div class="image ">
-            <img src="/images/logo.png" alt="">
+            <!--    <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto ">-->
+            <div class=" ">
+                <div class="image ">
+                    <a href=""><img src="/images/logo.png" alt=""></a>
+                </div>
+                <div class="d-flex flex-column text-center">
+                    <div class="name align-self-center  text-center">
+                        <a href="/products/view?id=<?= $product->id ?>">
+                            <?= $product->title ?>
+                        </a
+                    </div>
+                    <div class="description align-self-center text-center"><span><?= $product->body ?></span>
+                    </div>
+                    <div class="price align-self-center text-center"><span>Price</span><?= $product->price ?>
+                    </div>
+                </div>
+                <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
+                    ['class' => 'btn btn-success']) ?>
+            </div>
         </div>
-        <div class="d-flex flex-column">
-            <div class="name align-self-center">sefsef</div>
-            <div class="description align-self-center"><span></spandgdgdggd</span></div>
-            <div class="price align-self-center"><span>Price</span>465645</div>
-        </div>
-        <div>gsrgsdryhty</div>
-        <button class="btn">fd</button>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 m-auto justify-content-center">
-        <div class="image ">
-            <img src="/images/logo.png" alt="">
-        </div>
-        <div class="center-block">
-            <div class="name">sefsef</div>
-            <div class="description"><span></spandgdgdggd</span></div>
-            <div class="price"><span>Price</span>465645</div>
-        </div>
-        <div>gsrgsdryhty</div>
-        <button class="btn">fd</button>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 m-auto">
-        <div class="image ">
-            <img src="/images/logo.png" alt="">
-        </div>
-        <div class="center-block">
-            <div class="name">sefsef</div>
-            <div class="description"><span></spandgdgdggd</span></div>
-            <div class="price"><span>Price</span>465645</div>
-        </div>
-        <div>gsrgsdryhty</div>
-        <button class="btn">fd</button>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 m-auto">
-        <div class="image ">
-            <img src="/images/logo.png" alt="">
-        </div>
-        <div class="center-block">
-            <div class="name">sefsef</div>
-            <div class="description"><span></spandgdgdggd</span></div>
-            <div class="price"><span>Price</span>465645</div>
-        </div>
-        <div>gsrgsdryhty</div>
-        <button class="btn">fd</button>
-    </div>
-
-
+    <!--    </div>-->
+    <?php endforeach; ?>
 </div>
 
+<div class="col">
+    <form action="/site" class="select-quantity-form">
+        <select name="quantities" id="">
+            <?php foreach ($pageList as $key): ?>
+                <option value="<?= $key ?>"
+                    <?php if ($key === $quantities) echo 'selected' ?>>
+                    <?= $key ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
 
-<!--     Products -->-->
-<!---->
-<!--    <div class="products">-->
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                <div class="col-lg-6 offset-lg-3">-->
-<!--                    <div class="section_title text-center">Popular on Little Closet</div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="row page_nav_row">-->
-<!--                <div class="col">-->
-<!--                    <div class="page_nav">-->
-<!--                        <ul class="d-flex flex-row align-items-start justify-content-center">-->
-<!--                            <li class="active"><a href="category.html">Women</a></li>-->
-<!--                            <li><a href="category.html">Men</a></li>-->
-<!--                            <li><a href="category.html">Kids</a></li>-->
-<!--                            <li><a href="category.html">Home Deco</a></li>-->
-<!--                            <li><a href="category.html">Categories</a></li>-->
-<!---->
-<!--                    </div>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <!--                --><?php //if(Yii::$app->session->hasFlash('success')):?>
-        <!--                    <div class="alert alert-success" role="alert">-->
-        <!--                        --><? //= Yii::$app->session->getFlash('success'); ?>
-        <!--                    </div>-->
-        <!--                --><?php //endif;?>
-        <!--                --><?php //if(Yii::$app->session->hasFlash('error')):?>
-        <!--                <div class="alert alert-danger" role="alert">-->
-        <!--                    --><?php //echo Yii::$app->session->getFlash('error'); ?>
-        <!--                </div>-->
-        <!--                --><?php //endif;?>
-        <!--				<div class="row products_row">-->
+</div>
+<div class="container-fluid padding text-center">
 
+    <?= LinkPager::widget([
+        'pagination' => $pages,
+    ]); ?>
+</div>
 
-        <!-- Product -->
-<!--        --><?php
-//        //        echo count($products);
-//        foreach ($products as $product):
-//            ?>
-<!--            <div class="col-xl-4 col-md-6">-->
-<!--                <div class="product">-->
-<!--                    <div class="product_image"><img src="/images/product_1.jpg" alt=""></div>-->
-<!--                    <div class="product_content">-->
-<!--                        <div class="product_info d-flex flex-row align-items-start justify-content-start">-->
-<!--                            <div>-->
-<!--                                <div>-->
-<!--                                    <div class="product_name"><a-->
-<!--                                                href="../products/view?id=--><? //= $product->id ?><!--">--><? //= $product->title ?><!--</a>-->
-<!--                                    </div>-->
-<!--                                    <div class="product_category">In <a href="category.html">Cat</a></div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="ml-auto text-right">-->
-<!--                                <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i>-->
-<!--                                </div>-->
-<!--                                <div class="product_price text-right"><span>--><? //= $product->price ?><!--</span></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="product_buttons">-->
-<!--                            <div class="text-right d-flex flex-row align-items-start justify-content-start">-->
-<!--                                <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">-->
-<!--                                    <div>-->
-<!--                                        <div><img src="/images/heart_2.svg" class="svg" alt="">-->
-<!--                                            <div>+</div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div data-id="--><? //= $product->id ?><!--"-->
-<!--                                     class="addProdToCart product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">-->
-<!--                                    <div>-->
-<!--                                        <div><img src="/images/cart.svg" class="svg" alt="">-->
-<!--                                            <div>+</div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        --><?php //endforeach; ?>
-<!---->
-<!---->
-<!--    </div>-->
 <!--</div>-->
-</div>
-</div>
+
+
+<!--    <div class="col-md-12">-->
+<!--        <div class="row">-->
+<!--            <div class=" col col-sm-12 col-md-6 col-lg-4 col-xl-3">-->
+<!--                --><? //= \yii\helpers\Html::a('<img src="/images/noimage.png">',
+//                    ['/products/view', 'id' => $product->id],
+//                    ['target' => "_blank"]) ?>
 
 
 
@@ -223,7 +141,7 @@ $this->params['categoriesDropdown'] = $categories;
 <!--    window.onload = function () {-->
 <!--        $('.addProdToCart').on('click', function (ev) {-->
 <!--            ev.preventDefault();-->
-<!--            $.get('/cart/add-product?id=--><? //=$model->id?>//',
+<!--            $.get('/cart/add-product?id=--><? //=$model->id?>
 <!--function (msg) {-->
 <!--//-->
 <!--//                console.log(msg);-->

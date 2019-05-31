@@ -7,7 +7,7 @@ foreach ($products as $product):
     ?>
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-6">
+            <div class=" col col-sm-12 col-md-6 col-lg-4 col-xl-3">
                 <?= \yii\helpers\Html::a('<img src="/images/noimage.png">',
                     ['/products/view', 'id' => $product->id],
                     ['target' => "_blank"]) ?>

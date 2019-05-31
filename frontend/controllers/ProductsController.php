@@ -11,13 +11,15 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Categories;
+use yii\data\Pagination;
+use yii\widgets\LinkPager;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
  */
 class ProductsController extends Controller
 {
-    const ITEM_QUANTITY = 9;
+    const ITEM_QUANTITY = 3;
     protected $pageList = [
         '3' => '3',
         '9' => '9',
@@ -42,38 +44,54 @@ class ProductsController extends Controller
      * Lists all Products models.
      * @return mixed
      */
+//    public function actionIndex()
+//    {
+//        $page = Yii::$app->request->get('page') ?? 1;
+//        $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
+//            ?? self::ITEM_QUANTITY;
+//        if ($page < 1 && !is_numeric($page)) {
+//            $page = 1;
+//        }
+//        $products = Products::find()->where(['is', 'deleted_at', null])
+//            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_DESC]);
+//        $limits = $products->count();
+////        if (Yii::$app->request->isAjax){
+////            return $this->renderAjax('ajaxIndex',[
+////                'products' => $products->limit($quantities)->offset($quantities * ($page - 1))->all(),
+////                'page' => $page,
+////                'limits' => ['elements' => $limits, 'lastPage' => round($limits / $quantities)]
+////            ]);
+////        }
+////        else {
+//        return $this->render('index', [
+//            'pageList' => $this->pageList,
+//            'products' => $products->limit($quantities)->offset($quantities * ($page - 1))->all(),
+//            'page' => $page,
+//            'quantities' => $quantities,
+//            'limits' => ['elements' => $limits, 'lastPage' => round($limits / $quantities)]
+//        ]);
+////        }
+//    }
+
     public function actionIndex()
     {
-//        $products = new ActiveDataProvider([
-//            'query' => Products::find()->where('deleted_at is NULL'),
-//            'products' => Products::find()->where(['is','deleted_at', null]);
-//            ->andWhere(['=','status','1'])->all()
-//        ]);
-        $page = Yii::$app->request->get('page') ?? 1;
-        $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
-            ?? self::ITEM_QUANTITY;
-        if ($page < 1 && !is_numeric($page)) {
-            $page = 1;
-        }
         $products = Products::find()->where(['is', 'deleted_at', null])
             ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_DESC]);
-        $limits = $products->count();
-//        if (Yii::$app->request->isAjax){
-//            return $this->renderAjax('ajaxIndex',[
-//                'products' => $products->limit($quantities)->offset($quantities * ($page - 1))->all(),
-//                'page' => $page,
-//                'limits' => ['elements' => $limits, 'lastPage' => round($limits / $quantities)]
-//            ]);
-//        }
-//        else {
+//        $countProducts = clone $products;
+        $totalCount = $products->count();
+        $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
+            ?? self::ITEM_QUANTITY;
+        $pages = new Pagination(['totalCount' => $totalCount, 'pageSize' => $quantities]);
+        $models = $products->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
         return $this->render('index', [
+            'products' => $models,
+            'pages' => $pages,
             'pageList' => $this->pageList,
-            'products' => $products->limit($quantities)->offset($quantities * ($page - 1))->all(),
-            'page' => $page,
-            'quantities' => $quantities,
-            'limits' => ['elements' => $limits, 'lastPage' => round($limits / $quantities)]
+            'quantities' => $quantities
+
         ]);
-//        }
     }
 
     /**
@@ -86,12 +104,10 @@ class ProductsController extends Controller
     {
         $id = Yii::$app->request->get('id');
         $products = Products::find()->where(['id' => $id])->one();
-        $categories = CategoriesSearch::getParentCategories();
         return $this->render('view', [
-//            'products' => $products,
-            'model' => $products,
-            'categories' => $categories,
-        ]);;
+            'product' => $products,
+
+        ]);
     }
 
 //    public function actionFindCategoryProducts($category){

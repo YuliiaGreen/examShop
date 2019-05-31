@@ -13,7 +13,8 @@ use common\widgets\Alert;
 
 AppAsset::register($this);
 
-$this->beginPage() ?>
+$this->beginPage();
+$this->params['categoriesDropdown'] = \common\models\CategoriesSearch::getParentCategories() ?>
 
     <!DOCTYPE html>
     <html lang="<?= Yii::$app->language ?>">
@@ -34,15 +35,23 @@ $this->beginPage() ?>
 
     <body>
     <?php $this->beginBody() ?>
+
     <header>
         <!-- Navigation -->
 
         <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
             <div class="container-fluid">
-                <a href="<? Yii::$app->homeUrl ?>" class="navbar-brand overflow-hidden">
-                    <img src="/images/logo.png" style="height: 50px;" class="img-fluid rounded float-left"
-                         alt="Responsive image">
-                </a>
+                <?= Html::a(Html::img('/images/logo.png', [
+                    'alt' => 'MyShopLogo',
+                    'style' => "height: 50px;",
+                    'class' => "img-fluid rounded float-left p-2"
+                ]), [Yii::$app->homeUrl], ['class' => "navbar-brand overflow-hidden"]
+                ) ?>
+                <!--/*                <a href="-->
+                <? // Yii::$app->homeUrl?><!--" class="navbar-brand overflow-hidden">*/-->
+                <!--//                    <img src="/images/logo.png" style="height: 50px;" class="img-fluid rounded float-left"-->
+                <!--//                         alt="Responsive image">-->
+                <!--//                </a>-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive">
                     <span class="navbar-toggler-icon"></span>
@@ -62,7 +71,7 @@ $this->beginPage() ?>
                             <a class="nav-link" href="<?= Yii::$app->homeUrl ?>site/login">Вхід</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Реєстрація</a>
+                            <a class="nav-link" href="<?= Yii::$app->homeUrl ?>site/signup">Реєстрація</a>
                         </li>
                         <li class="dropdown  nav-item">
                             <a class="dropdown-toggle nav-link" data-toggle="dropdown"
@@ -76,12 +85,20 @@ $this->beginPage() ?>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= Yii::$app->homeUrl ?>cart"><img style="height: 40px"
+                                                                                          class="img-fluid"
+                                                                                          alt="Responsive image"
+                                                                                          src="/images/cart.svg"
+                                                                                          alt="https://www.flaticon.com/authors/freepik"></a>
+                        </li>
+
                     </ul>
                     <div class="menu_search navbar-nav ml-auto">
                         <form action="<?= \yii\helpers\Url::to('/site/search') ?>" id="menu_search_form"
                               class="menu_search_form">
                             <input type="text" name="param" class="search_input" placeholder="Search Item"
-                                   required="required">
+                            >
                             <button type="submit" class="menu_search_button"><img src="/images/search.png" alt="">
                             </button>
                             <!--                                    <input type="submit">-->
@@ -89,9 +106,25 @@ $this->beginPage() ?>
 
                     </div>
         </nav>
+        <?php if (Yii::$app->session->hasFlash('success')): ?>
+            <div class="alert alert-success" role="alert">
+                <?= Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php endif; ?>
+        <?php if (Yii::$app->session->hasFlash('error')): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php endif; ?>
+        <?php if (Yii::$app->session->hasFlash('notLog')): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo Yii::$app->session->getFlash('notLog'); ?>
+            </div>
+        <?php endif; ?>
     </header>
 
     <?= $content ?>
+
     <div class="connect">
         <div class="container-fluid padding">
             <div class="row text-center padding">
@@ -110,49 +143,64 @@ $this->beginPage() ?>
             </div>
         </div>
     </div>
-    <footer>
-        <!--                -->
-        <div class="container-fluid padding">
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <hr class="light">
-                    <p style="overflow: hidden;" class="top-cover center-block">
-                        <a href="<? Yii::$app->homeUrl ?>">
-                            <img src="/images/logo.png" style="height: 100px" class="img-fluid rounded"
-                                 alt="Responsive image">
-                        </a>
-                    </p>
-                    <hr class="light">
-                </div>
-                <div class="col-md-4">
-                    <!--                            <img src="/images/logo.png" alt="">-->
-                    <hr class="light">
-                    <p> Our Hours</p>
-                    <hr class="light">
-                    <p>Monday</p>
-                    <p>Tuesday</p>
-                    <p>Wednesday</p>
-                    <p>Thursday</p>
-                        </div>
-                <div class="col-md-4">
-                    <hr class="light">
-                    <p>Details</p>
-                    <hr class="light">
-                    <p>+30 000 00 00</p>
-                    <p>examShop@gmail.com</p>
-                    <p>100 Street Name</p>
-                    <p>Lutsk, Volyn region</p>
-                </div>
-                <div class="col-12">
-                    <hr class="light">
-                    <h5> Yulia Maxymchuk 2019</h5>
-                </div>
-            </div>
-                </div>
+    <!--Google map-->
 
-    </footer>
+    <main class=" m-0 p-0 ">
+        <div class="container-fluid m-0 p-0">
+            <!--Google map-->
+            <div id="map-container-google-4" class="z-depth-1-half map-container-4" style="height: 500px">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80797.60223097516!2d25.263964752676518!3d50.739878611418355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472599eba185965d%3A0xd25274a2228db86c!2z0JvRg9GG0YzQuiwg0JLQvtC70LjQvdGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1559294697840!5m2!1suk!2sua"
+                        style="border:0" allowfullscreen>
+
+                </iframe>
+            </div>
+        </div>
+    </main>
+    <!--Main layout-->
+    <!--    <footer>-->
+    <!--        <!--                -->-->
+    <!--        <div class="container-fluid padding">-->
+    <!--            <div class="row text-center">-->
+    <!--                <div class="col-md-4">-->
+    <!--                    <hr class="light">-->
+    <!--                    <p style="overflow: hidden;" class="top-cover center-block">-->
+    <!--                        <a href="--><? // Yii::$app->homeUrl ?><!--">-->
+    <!--                            <img src="/images/logo.png" style="height: 100px" class="img-fluid rounded"-->
+    <!--                                 alt="Responsive image">-->
+    <!--                        </a>-->
+    <!--                    </p>-->
+    <!--                    <hr class="light">-->
+    <!--                </div>-->
+    <!--                <div class="col-md-4">-->
+    <!--                    <!--                            <img src="/images/logo.png" alt="">-->-->
+    <!--                    <hr class="light">-->
+    <!--                    <p> Our Hours</p>-->
+    <!--                    <hr class="light">-->
+    <!--                    <p>Monday</p>-->
+    <!--                    <p>Tuesday</p>-->
+    <!--                    <p>Wednesday</p>-->
+    <!--                    <p>Thursday</p>-->
+    <!--                        </div>-->
+    <!--                <div class="col-md-4">-->
+    <!--                    <hr class="light">-->
+    <!--                    <p>Details</p>-->
+    <!--                    <hr class="light">-->
+    <!--                    <p>+30 000 00 00</p>-->
+    <!--                    <p>examShop@gmail.com</p>-->
+    <!--                    <p>100 Street Name</p>-->
+    <!--                    <p>Lutsk, Volyn region</p>-->
+    <!--                </div>-->
+    <!--                <div class="col-12">-->
+    <!--                    <hr class="light">-->
+    <!--                    <h5> Yulia Maxymchuk 2019</h5>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!---->
+    <!--    </footer>-->
 
     <?php $this->endBody() ?>
     </body>
     </html>
 <?php $this->endPage() ?>
+

@@ -8,6 +8,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\data\Pagination;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -24,6 +25,11 @@ use app\models\Products;
  */
 class SiteController extends Controller
 {
+    const ITEM_QUANTITY = 3;
+    protected $pageList = [
+        '3' => '3',
+        '9' => '9',
+        '12' => '12'];
     /**
      * {@inheritdoc}
      */
@@ -81,12 +87,30 @@ class SiteController extends Controller
         $categories = CategoriesSearch::getParentCategories();
 
         $products = Products::find()->where(['is', 'deleted_at', null])
-            ->andWhere(['=', 'status', '1'])->all();
-
-        return $this->render('index', [
-            'products' => $products,
-            'categories' => $categories,
+            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_DESC]);
+        $totalCount = $products->count();
+        $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
+            ?? self::ITEM_QUANTITY;
+        $pages = new Pagination(['totalCount' => $totalCount, 'pageSize' => $quantities, 'forcePageParam' => false
+            , 'pageSizeParam' => false
         ]);
+        $models = $products->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+        return $this->render('index', [
+            'products' => $models,
+            'pages' => $pages,
+            'pageList' => $this->pageList,
+            'quantities' => $quantities,
+            'categories' => $categories
+        ]);
+//        $products = Products::find()->where(['is', 'deleted_at', null])
+//            ->andWhere(['=', 'status', '1'])->all();
+//
+//        return $this->render('index', [
+//            'products' => $products,
+//            'categories' => $categories,
+//        ]);
     }
 
     /**
@@ -108,6 +132,8 @@ class SiteController extends Controller
 
             return $this->render('login', [
                 'model' => $model,
+
+
             ]);
         }
     }
@@ -280,13 +306,36 @@ class SiteController extends Controller
 
     public function actionSearch($param)
     {
+        $categories = CategoriesSearch::getParentCategories();
+
         $products = Products::find()->where(['like', 'title', $param])
             ->orWhere(['like', 'body', $param])
             ->all();
-        return $this->render('index', [
-            'products' => $products,
-            'categories' => CategoriesSearch::getParentCategories()
-
+        $query = Products::find()->where(['like', 'title', $param])
+            ->orWhere(['like', 'body', $param]);
+        $totalCount = $query->count();
+        $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
+            ?? self::ITEM_QUANTITY;
+        $pages = new Pagination(['totalCount' => $totalCount, 'pageSize' => $quantities]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+//        print_r($products);
+        if (empty($products)) {
+            Yii::$app->session->setFlash('error', 'За вашим запитом нічого не знайдено.');
+            return $this->render('index', [
+                'products' => $products,
+                'pages' => $pages,
+                'pageList' => $this->pageList,
+                'quantities' => $quantities,
+                'categories' => $categories]);
+        } else
+            return $this->render('index', [
+                'products' => $products,
+                'pages' => $pages,
+                'pageList' => $this->pageList,
+                'quantities' => $quantities,
+                'categories' => $categories
         ]);
     }
 
