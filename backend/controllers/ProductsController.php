@@ -88,7 +88,6 @@ class ProductsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -109,9 +108,18 @@ class ProductsController extends Controller
      */
     public function actionDelete($id)
     {
-//        $this->findModel($id)->delete();
-        $this->findModel($id)->update();
-
+//        $this->deleted_at = time();
+//        $this->status = self::ST
+//        $this->save();
+        $model = $this->findModel($id);
+        $model->delete();
+//
+//
+//        return $this->render('update', [
+//            'model' => $model,
+//            'dropdownData' => $model->getAllCategoriesAsArray(),
+//            'statusList' => $model->getStatusList()
+//        ]);
         return $this->redirect(['index']);
     }
 

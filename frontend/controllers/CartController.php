@@ -30,7 +30,7 @@ class CartController extends \yii\web\Controller
 //        return $this->asJson(['status' => 'error']);
 
         if (Yii::$app->user->getIsGuest()) {
-            Yii::$app->session->setFlash('notLog', 'only for register user. enter or '
+            Yii::$app->session->setFlash('error', 'Тільки для зареєстрованих користувачів. '
                 . Html::a('register', '/site/signup'));
             return Yii::$app->response->redirect('/site/login');
         } else {

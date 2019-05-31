@@ -129,14 +129,30 @@ header {
     width: 100%;
     position: absolute;
 }
+
 footer {
-    position: absolute;
+    /*position: absolute;*/
     left: 0;
     bottom: 0;
     background-color: #3f3f3f;
     color: #f2f8ff;
     padding-top: 2rem;
     /*clear: both;*/
+}
+
+.search-form-parent-item {
+    width: 100%;
+    position: relative;
+}
+
+.search-form-parent-item button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.pagination {
+    justify-content: center;
 }
 
 main {

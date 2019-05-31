@@ -1,4 +1,3 @@
-
 <?php
 /*@var $categories - список категорій дропдауном*/
 
@@ -39,7 +38,7 @@ $this->params['categoriesDropdown'] = $categories;
 <div class="container-fluid padding">
     <div class="row text-center padding">
         <div class="col-xs-12 col-sm-6 col-md-4">
-            <i class="fas fa-american-sign-language-interpreting"></i>
+            <i class="fa fa-american-sign-language-interpreting"></i>
             <h3>New 1</h3>
             <p>New1 Text</p>
         </div>
@@ -65,7 +64,7 @@ $this->params['categoriesDropdown'] = $categories;
         as $product): ?>
         <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto flex-wrap">
             <!--<div class="overflow-auto pos-absolute">-->
-    <!--<div class="row text-center padding align-content-between">-->
+            <!--<div class="row text-center padding align-content-between">-->
             <!--    <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto ">-->
             <div class=" ">
                 <div class="image ">
@@ -108,6 +107,7 @@ $this->params['categoriesDropdown'] = $categories;
 
     <?= LinkPager::widget([
         'pagination' => $pages,
+        'class' => 'text-center'
     ]); ?>
 </div>
 
@@ -120,8 +120,6 @@ $this->params['categoriesDropdown'] = $categories;
 <!--                --><? //= \yii\helpers\Html::a('<img src="/images/noimage.png">',
 //                    ['/products/view', 'id' => $product->id],
 //                    ['target' => "_blank"]) ?>
-
-
 
 
 <!--<script src="js/jquery-3.2.1.min.js"></script>-->

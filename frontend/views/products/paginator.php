@@ -8,7 +8,6 @@
  * *@var $;
  * *@var $;
  */
-
 $baseUrl = $baseUrl ?? $_SERVER['REQUEST_URI'];
 if ($page == 1 && mb_strrpos($baseUrl, 'page=') === false) {
     $baseUrl .= (mb_strrpos($baseUrl, '?') === false) ? '?page=1' : '&page=1';

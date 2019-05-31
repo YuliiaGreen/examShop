@@ -6,8 +6,9 @@
  * Time: 14:00
  */
 ?>
+
 <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-5 m-auto">
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>

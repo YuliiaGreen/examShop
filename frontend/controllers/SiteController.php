@@ -29,7 +29,9 @@ class SiteController extends Controller
     protected $pageList = [
         '3' => '3',
         '9' => '9',
-        '12' => '12'];
+        '12' => '12'
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -336,7 +338,7 @@ class SiteController extends Controller
                 'pageList' => $this->pageList,
                 'quantities' => $quantities,
                 'categories' => $categories
-        ]);
+            ]);
     }
 
 //    public function actionAddProduct(){

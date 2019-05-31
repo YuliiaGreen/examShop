@@ -6,7 +6,12 @@
 /* @var $limits */
 /* @var $pageList */
 /* @var pag */
+/* @var $this yii\web\View */
 
+/* @var $model app\models\Products */
+
+use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\LinkPager;
 ?>
 
@@ -46,7 +51,7 @@ use yii\widgets\LinkPager;
         <select name="quantities" id="">
             <?php foreach ($pageList as $key): ?>
                 <option value="<?= $key ?>"
-                <?php if ($key === $quantities) echo 'selected' ?>
+                    <?php if ($key === $quantities) echo 'selected' ?>>
                 <?= $key ?>
                 </option>
             <?php endforeach; ?>
@@ -56,15 +61,17 @@ use yii\widgets\LinkPager;
 </div>
 <div class="container-fluid padding text-center">
 
-    <?= LinkPager::widget([
-        'pagination' => $pages,
-    ]); ?>
-    <!--        --><?php //$this->render('paginator', [
-    //            'limits' => $limits,
-    //            'page' => $page]);
-    //        ?>
+    <!--    --><? //= LinkPager::widget([
+    //        'pagination' => $pages,
+    //    ]); ?>
 
-    <!--        --><? //= Yii::$app->controller->render('paginator', ['limits', 'page']); ?>
+    <?php echo $this->render('paginator', [
+        'limits' => $limits,
+        'page' => $page]);
+
+    ?>
+
+    <? //= Yii::$app->controller->render('paginator', ['limits', 'page']); ?>
     <!--                        --><? //= $this->render('paginator',compact('limits','page'))?>
 </div>
 
