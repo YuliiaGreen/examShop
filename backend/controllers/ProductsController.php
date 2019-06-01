@@ -36,15 +36,19 @@ class ProductsController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Products::find(),
-        ]);
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Products::find(),
+            ]);
+
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
-
     /**
      * Displays a single Products model.
      * @param integer $id
@@ -53,9 +57,14 @@ class ProductsController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
+
+        } else {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
@@ -65,17 +74,22 @@ class ProductsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Products();
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $model = new Products();
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+                'dropdownData' => $model->getAllCategoriesAsArray(),
+                'statusList' => $model->getStatusList()
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-            'dropdownData' => $model->getAllCategoriesAsArray(),
-            'statusList' => $model->getStatusList()
-        ]);
     }
 
     /**
@@ -87,16 +101,21 @@ class ProductsController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
 
-        return $this->render('update', [
-            'model' => $model,
-            'dropdownData' => $model->getAllCategoriesAsArray(),
-            'statusList' => $model->getStatusList()
-        ]);
+        } else {
+            $model = $this->findModel($id);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+                'dropdownData' => $model->getAllCategoriesAsArray(),
+                'statusList' => $model->getStatusList()
+            ]);
+        }
     }
 
     /**
@@ -108,19 +127,15 @@ class ProductsController extends Controller
      */
     public function actionDelete($id)
     {
-//        $this->deleted_at = time();
-//        $this->status = self::ST
-//        $this->save();
-        $model = $this->findModel($id);
-        $model->delete();
-//
-//
-//        return $this->render('update', [
-//            'model' => $model,
-//            'dropdownData' => $model->getAllCategoriesAsArray(),
-//            'statusList' => $model->getStatusList()
-//        ]);
-        return $this->redirect(['index']);
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
+
+        } else {
+            $model = $this->findModel($id);
+            $model->delete();
+
+            return $this->redirect(['index']);
+        }
     }
 
     /**
@@ -139,12 +154,17 @@ class ProductsController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    protected function findC($id)
+    protected function actionRestore($id)
     {
-        if (($model = Products::findOne($id)) !== null) {
-            return $model;
-        }
+        $product = Products::findOne($id);
+        if ($product instanceof Products) {
+            $product->deleted_at = null;
+            $product->status = 1;
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+            if ($product->save()) {
+                return Yii::$app->response->redirect(['products/view', 'id' => $id], 302);
+            }
+        }
     }
+
 }

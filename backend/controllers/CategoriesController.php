@@ -35,13 +35,18 @@ class CategoriesController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Categories::find(),
-        ]);
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Categories::find(),
+            ]);
+
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -52,11 +57,15 @@ class CategoriesController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
 
+        } else {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+    }
     /**
      * Creates a new Categories model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -64,15 +73,20 @@ class CategoriesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Categories();
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $model = new Categories();
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -84,15 +98,20 @@ class CategoriesController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $model = $this->findModel($id);
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -104,9 +123,14 @@ class CategoriesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['site/login']);
 
-        return $this->redirect(['index']);
+        } else {
+            $this->findModel($id)->delete();
+
+            return $this->redirect(['index']);
+        }
     }
 
     /**
@@ -116,7 +140,7 @@ class CategoriesController extends Controller
      * @return Categories the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Categories::findOne($id)) !== null) {
             return $model;

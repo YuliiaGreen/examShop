@@ -3,7 +3,7 @@
 use yii\db\Migration;
 
 /**
- * Class m190515_160158_table_dynamic_atributes
+ * Class m190515_160158_table_dynamic_attributes
  */
 class m190515_160158_table_dynamic_attributes extends Migration
 {
@@ -12,7 +12,14 @@ class m190515_160158_table_dynamic_attributes extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('{%attributes}', []);
+        $this->createTable('{{%attributes}}', [
+            'id' => $this->primaryKey(),
+            'title' => $this->string()->notNull(),
+            'image_path' => $this->string(),
+            'created_at' => $this->bigInteger(),
+            'updated_at' => $this->bigInteger(),
+            'deleted_at' => $this->bigInteger(),
+        ]);
 
 
     }
@@ -22,9 +29,9 @@ class m190515_160158_table_dynamic_attributes extends Migration
      */
     public function safeDown()
     {
-        echo "m190515_160158_table_dynamic_attributes cannot be reverted.\n";
+        $this->dropTable('{{%attributes}}');
 
-        return false;
+
     }
 
     /*

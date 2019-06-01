@@ -1,5 +1,9 @@
 <?php
 /*@var $categories - список категорій дропдауном*/
+/*@var $products - */
+/*@var $pageList -   */
+
+/*@var $quantities -   */
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;

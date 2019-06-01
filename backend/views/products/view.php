@@ -23,7 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]);
+        ?>
+        <?php
+        if ($model->deleted_at !== null) {
+            echo Html::a('Restore', ['restore', 'id' => $model->id], [
+                'class' => 'btn btn-success',
+            ]);
+        }
+        ?>
     </p>
 
     <?= DetailView::widget([
