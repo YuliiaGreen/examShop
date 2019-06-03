@@ -83,7 +83,15 @@ AppAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
-
+<script>
+    window.onload = function () {
+        var attribute = $('.dynamic-attributes .single-attribute').html();
+        $('.dynamic-attributes .add-attributes')
+        on.('click', function () {
+            $('.dynamic-attributes').append(attribute);
+        })
+    }
+</script>
 <?php $this->endBody() ?>
 </body>
 </html>

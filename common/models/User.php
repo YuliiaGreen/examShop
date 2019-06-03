@@ -211,4 +211,17 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function getPhoneNumber()
+    {
+//        $user = User::findOne($id);
+//        return $user->phoneNomber;
+        $this->phoneNomber;
+    }
+
+    public function getShoppingCarts()
+    {
+        return $this->hasMany(ShoppingCart::className(), ['user_id' => 'id']);
+    }
+
 }

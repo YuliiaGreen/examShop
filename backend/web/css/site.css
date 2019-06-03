@@ -118,3 +118,7 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.site-login {
+    background-image: url("http://www.geldanlage-boerse-wirtschaft.com/image-files/crypto-sicherheit.png");
+}

@@ -49,8 +49,7 @@ class CategoriesController extends Controller
         if ($page < 1 && !is_numeric($page)) {
             $page = 1;
         }
-        $products = Products::find()->where(['is', 'deleted_at', null])
-            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_DESC])->all();
+        $products = \common\models\Categories::find()->all();
 
         return $this->render('index', [
             'categories' => CategoriesSearch::getParentCategories(),

@@ -86,8 +86,6 @@ class User extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getShoppingCarts()
-    {
-        return $this->hasMany(ShoppingCart::className(), ['user_id' => 'id']);
-    }
+
+
 }

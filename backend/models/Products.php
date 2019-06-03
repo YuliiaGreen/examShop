@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use frontend\models\ShoppingCart;
+use yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "products".
  *
@@ -27,6 +29,9 @@ use frontend\models\ShoppingCart;
 class Products extends \yii\db\ActiveRecord
 {
     public $selected_categories;
+    public $attribute;
+    public $attributes_value;
+
 
     /**
      * {@inheritdoc}
@@ -92,6 +97,22 @@ class Products extends \yii\db\ActiveRecord
     public function getProductsMappings()
     {
         return $this->hasMany(ProductsMapping::className(), ['product_id' => 'id']);
+    }
+
+    public function getAllAttributesMappings()
+    {
+        return ArrayHelper::map(Attributes::find()->asArray()->all(), 'id', 'title');
+    }
+
+    public function getAllAttributesValuesMappings()
+    {
+        return ArrayHelper::map(AttributesValues::find()->asArray()->all(), 'id', 'title');
+    }
+
+    public function getRelatedAttributesValues()
+    {
+        return Attributes::find()->with('attributesValues')->all();
+//       return Attributes::find()->with('attributesValues')->all();
     }
 
     /**

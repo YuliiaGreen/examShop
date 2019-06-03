@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use app\models\Products;
 use app\models\ProductsShoppingCart;
+use common\models\User;
 use frontend\models\ShoppingCart;
 use yii\filters\VerbFilter;
 use Yii;
@@ -83,10 +84,8 @@ class CartController extends \yii\web\Controller
             foreach ($cart->products as $product) {
                 $quantity[$product->id] = ProductsShoppingCart::find()->where(['=', 'products_id', $product->id])
                     ->andWhere(['=', 'shopping_cart_id', $cart->id])->one()->quantity;
-//                var_dump($getData);
-//                echo '<hr>';
+
             }
-//                var_dump($getData);
             return $this->render('index', ['cart' => $cart, 'quantity' => $quantity]);
         }
     }
@@ -97,10 +96,18 @@ class CartController extends \yii\web\Controller
         if ($shoppingCart->isNewRecord) {
             return $this->asJson(['status' => 'error']);
         } else {
+//            $userPhone=User::getUsersPhoneNumber(Yii::$app->user->id);
+//            if (!empty($userPhone)) {
             $shoppingCart->status = 'approved';
             if ($shoppingCart->save()) {
+                Yii::$app->getSession()->setFlash('success',
+                    'Дякуємо! Hомер Вашого замовлення <?=$id?> Найблищим часом з вами зв*яжеться наш менеджер для уточнення деталей покупки.');
                 return $this->render('success', ['id' => $shoppingCart->id]);
             }
+//        }
+//            else{
+//             echo 'kejfwkefj';
+//            }
         }
     }
 
@@ -113,6 +120,22 @@ class CartController extends \yii\web\Controller
         echo '</pre>';
 //        }
 //site /index
+    }
+
+    public function actionDeleteProduct($id)
+    {
+        $cart = ShoppingCart::findLastCart();
+        $this->actionAddProduct('1');
+        echo '<pre>';
+        var_dump($cart->productsShoppingCarts);
+        echo '</pre>';
+
+    }
+
+    public function actionPhone()
+    {
+        print_r(Yii::$app->user->phoneNomber);
+
     }
 }
 

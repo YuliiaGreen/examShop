@@ -79,7 +79,9 @@ class ProductsController extends Controller
 
         } else {
             $model = new Products();
-
+//            echo'<pre>';
+//            var_dump( $model->getRelatedAttributesValues()[1]);
+//            echo'<pre>';
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -87,7 +89,8 @@ class ProductsController extends Controller
             return $this->render('create', [
                 'model' => $model,
                 'dropdownData' => $model->getAllCategoriesAsArray(),
-                'statusList' => $model->getStatusList()
+                'statusList' => $model->getStatusList(),
+                'attributesData' => $model->getRelatedAttributesValues(),
             ]);
         }
     }
