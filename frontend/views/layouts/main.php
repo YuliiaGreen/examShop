@@ -239,6 +239,14 @@ $this->params['categoriesDropdown'] = $categories
         })
     }
 </script>
+<script>
+    window.onload = function () {
+        var attribute = $('.dynamic-attributes .single-attribute').html();
+        $('.dynamic-attributes .add-attribute').on('click', function () {
+            $('.dynamic-attributes').append(attribute);
+        });
+    }
+</script>
 <?php $this->endBody() ?>
 </body>
 </html>

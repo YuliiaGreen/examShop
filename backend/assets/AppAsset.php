@@ -25,9 +25,9 @@ class AppAsset extends AssetBundle
 //        'fonts/themify/themify-icons.css',
 //        'fonts/font-awesome-4.7.0/css/font-awesome.min.css',
 //        'vendor/bootstrap/css/bootstrap.min.css',
-//        'css/site.css',
+        'css/site.css',
 //        'css/util.css',
-        'css/main.css',
+//        'css/main.css',
 
 
     ];

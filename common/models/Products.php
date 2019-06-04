@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use app\models\Attributes;
 use app\models\AttributesValues;
 use app\models\ProductsMapping;
+use app\models\ProductsShoppingCart;
 /**
  * This is the model class for table "products".
  *

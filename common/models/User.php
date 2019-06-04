@@ -29,6 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    const STATUS_ADMIN = 100;
 
     use SexTrait;
 
@@ -57,9 +58,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['sex', 'in', 'range' => $this->getAllSex()],
+            ['sex', 'default', 'value' => $this->getUnderfinedSex()],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['username', 'auth_key', 'password_hash', 'email', 'updated_at'], 'required'],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED, self::STATUS_ADMIN]],
+            [['username', 'auth_key', 'password_hash', 'email',], 'required'],
             [['deleted_at', 'dateOfBirth'], 'safe'],
             [['phoneNomber'], 'number'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
@@ -119,6 +121,11 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public static function findAdmin($username)
+    {
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ADMIN]);
     }
 
     /**
@@ -249,6 +256,13 @@ class User extends ActiveRecord implements IdentityInterface
 //        $user = User::findOne($id);
 //        return $user->phoneNomber;
         return $this->phoneNomber;
+    }
+
+    public function getSex()
+    {
+//        $user = User::findOne($id);
+//        return $user->phoneNomber;
+        return $this->sex;
     }
 
     public function getShoppingCarts()

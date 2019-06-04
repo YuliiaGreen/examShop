@@ -77,6 +77,7 @@ class CartController extends \yii\web\Controller
             return Yii::$app->response->redirect('site/login');
         } else {
             $cart = ShoppingCart::findLastCart();
+            print_r($cart);
             if (empty($cart->products)) {
                 Yii::$app->session->setFlash('info', 'Cart is empty');
             }
@@ -90,6 +91,10 @@ class CartController extends \yii\web\Controller
         }
     }
 
+    public function actionAddQtt($id)
+    {
+
+    }
     public function actionConfirmCart()
     {
         $shoppingCart = ShoppingCart::findLastCart();

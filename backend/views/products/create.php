@@ -37,26 +37,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'status')->dropDownList($statusList) ?>
 
-        <div class="dynamic-attributes">
-            <div class="add-attributes border">+</div>
-            <?php
-            $attributesDDList = \yii\helpers\ArrayHelper::map($attributesData, 'id', 'title');
-            $attributesValuesDDList = \yii\helpers\ArrayHelper::map($attributesData[0]->attributesValues, 'id', 'title');
-            $resultJs = [];
-            foreach ($attributesData as $key => $attribute):?>
-
-                <?php $resultJs[$attribute->id]['id'] = $attribute->id ?>
-                <?php $resultJs[$attribute->id]['title'] = $attribute->title ?>
-                <?php foreach ($attribute->attributesValues as $attributesValuesId => $value): ?>
-                    <?= $resultJs[$attribute->id]['attributesValues'][$value->id]['id'] = $value->id ?>
-                    <?= $resultJs[$attribute->id]['attributesValues'][$value->id]['title'] = $value->title ?>
-                <?php endforeach ?>
-            <?php endforeach; ?>
-            <div class="single-attribute">
-                <?= $form->field($model, 'attribute')->dropDownList($attributesDDList, ['class' => 'col-md-4'])->label('') ?>
-                <?= $form->field($model, 'attributes_value')->dropDownList($attributesValuesDDList, ['class' => 'col-md-4'])->label('') ?>
-            </div>
-        </div>
+        <!--        <div class="dynamic-attributes">-->
+        <!--            <div class="add-attributes border">+</div>-->
+        <!--            --><?php
+        //            $attributesDDList = \yii\helpers\ArrayHelper::map($attributesData, 'id', 'title');
+        //            $attributesValuesDDList = \yii\helpers\ArrayHelper::map($attributesData[0]->attributesValues, 'id', 'title');
+        //            $resultJs = [];
+        //            foreach ($attributesData as $key => $attribute):?>
+        <!---->
+        <!--                --><?php //$resultJs[$attribute->id]['id'] = $attribute->id ?>
+        <!--                --><?php //$resultJs[$attribute->id]['title'] = $attribute->title ?>
+        <!--                --><?php //foreach ($attribute->attributesValues as $attributesValuesId => $value): ?>
+        <!--                    --><? //= $resultJs[$attribute->id]['attributesValues'][$value->id]['id'] = $value->id ?>
+        <!--                    --><? //= $resultJs[$attribute->id]['attributesValues'][$value->id]['title'] = $value->title ?>
+        <!--                --><?php //endforeach ?>
+        <!--            --><?php //endforeach; ?>
+        <!--            <div class="single-attribute">-->
+        <!--                --><? //= $form->field($model, 'attribute')->dropDownList($attributesDDList, ['class' => ['col-md-4','ddlist']])->label('') ?>
+        <!--                --><? //= $form->field($model, 'attributes_value')->dropDownList($attributesValuesDDList, ['class' => 'col-md-4'])->label('') ?>
+        <!--            </div>-->
+        <!--        </div>-->
 
         <div class="form-group">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
@@ -68,7 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
-<script>
-    var a = <?= json_encode($resultJs)?>
-        console.log(a);
-</script>
+<!--<script>-->
+<!--    var a = --><? //= json_encode($resultJs)?><!--;-->
+<!---->
+<!---->
+<!--        console.log(a);-->
+<!--// </script>-->

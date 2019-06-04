@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use common\models\Products;
+use common\models\ProductsCategories;
 
 /**
  * This is the model class for table "categories".

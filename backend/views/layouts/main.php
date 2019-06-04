@@ -88,10 +88,15 @@ AppAsset::register($this);
 <script>
     window.onload = function () {
         var attribute = $('.dynamic-attributes .single-attribute').html();
-        $('.dynamic-attributes .add-attributes')
-        on.('click', function () {
+        $('.dynamic-attributes .add-attributes').on('click', function () {
             $('.dynamic-attributes').append(attribute);
         })
+        // $('select.ddlist').on('change',function (ev) {
+        //    $(this).select().val() ;
+        //
+        //    for()
+        //     $('#products-attributes_value');
+        // })
     }
 </script>
 <?php $this->endBody() ?>
