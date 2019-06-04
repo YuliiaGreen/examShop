@@ -65,6 +65,12 @@ class CategoriesController extends Controller
      */
     public function actionView($id)
     {
+        $page = Yii::$app->request->get('page') ?? 1;
+        $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
+            ?? self::ITEM_QUANTITY;
+        if ($page < 1 && !is_numeric($page)) {
+            $page = 1;
+        }
         $id = Yii::$app->request->get('id');
         $category = Categories::find()->with('products')->where(['id' => $id])->one();
 //        print_r( $category);
@@ -80,7 +86,7 @@ class CategoriesController extends Controller
 //            dd($temp);
         return $this->render('view', [
 //            'products' => $products,
-            'model' => $category,
+            'product' => $category,
             'categories' => CategoriesSearch::getParentCategories(),
 
         ]);

@@ -67,7 +67,7 @@ $this->params['categoriesDropdown'] = $categories
                         <a class="nav-link" href="">Про нас</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Контакти</a>
+                        <a class="nav-link" href="#contact">Контакти</a>
                     </li>
                     <li class="dropdown  nav-item">
                         <a class="dropdown-toggle nav-link" data-toggle="dropdown"
@@ -76,7 +76,7 @@ $this->params['categoriesDropdown'] = $categories
                             <?php foreach ($this->params['categoriesDropdown'] as $category): ?>
                                 <li class="nav-item">
                                     <a class="nav-link"
-                                       href="categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
+                                       href="<?= Yii::$app->homeUrl ?>categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -111,7 +111,7 @@ $this->params['categoriesDropdown'] = $categories
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="<?= Yii::$app->homeUrl ?>user/update?id=<?= Yii::$app->user->id ?>"><img
+                           href="<?= Yii::$app->homeUrl ?>user/update"><img
                                     style="height: 40px"
                                     class="img-fluid"
                                     alt="Responsive image"
@@ -214,7 +214,7 @@ $this->params['categoriesDropdown'] = $categories
                 <p>Wednesday</p>
                 <p>Thursday</p>
             </div>
-            <div class="col-md-4">
+            <div id="contact" class="col-md-4">
                 <hr class="light">
                 <p>Details</p>
                 <hr class="light">

@@ -105,7 +105,7 @@ class CartController extends \yii\web\Controller
             }
             } else {
                 Yii::$app->session->setFlash('error', 'Pfgjdyscnm jhfks');
-                return $this->render('/user/update', ['model' => Yii::$app->user->identity]);
+                return $this->redirect('/user/update');
             }
         }
     }
