@@ -78,13 +78,14 @@ class CategoriesController extends Controller
 
         } else {
             $model = new Categories();
-
+//            $app\models\Categories::find()->asArray()->all()]
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
             return $this->render('create', [
                 'model' => $model,
+                'categories' => Categories::getAllCategoriesAsArray(),
             ]);
         }
     }
@@ -103,13 +104,13 @@ class CategoriesController extends Controller
 
         } else {
             $model = $this->findModel($id);
-
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
             return $this->render('update', [
                 'model' => $model,
+                'categories' => Categories::getAllCategoriesAsArray(),
             ]);
         }
     }
@@ -148,4 +149,5 @@ class CategoriesController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }
