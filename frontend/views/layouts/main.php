@@ -36,7 +36,6 @@ $this->params['categoriesDropdown'] = $categories
     <?php $this->head() ?>
 </head>
 
-<body>
 <?php $this->beginBody() ?>
 
 <header>
@@ -70,6 +69,18 @@ $this->params['categoriesDropdown'] = $categories
                     <li class="nav-item">
                         <a class="nav-link" href="">Контакти</a>
                     </li>
+                    <li class="dropdown  nav-item">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                           id="dropdownMenuLink">Категорії</a>
+                        <ul class="dropdown-menu">
+                            <?php foreach ($this->params['categoriesDropdown'] as $category): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </li>
                     <?php if (Yii::$app->user->isGuest == false): ?>
                         <li>
                             <?= Html::beginForm(['/site/logout'], 'post')
@@ -90,24 +101,22 @@ $this->params['categoriesDropdown'] = $categories
                             <a class="nav-link" href="<?= Yii::$app->homeUrl ?>site/signup">Реєстрація</a>
                         </li>
                     <?php endif; ?>
-                    <li class="dropdown  nav-item">
-                        <a class="dropdown-toggle nav-link" data-toggle="dropdown"
-                           id="dropdownMenuLink">Категорії</a>
-                        <ul class="dropdown-menu">
-                            <?php foreach ($this->params['categoriesDropdown'] as $category): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                       href="categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="<?= Yii::$app->homeUrl ?>cart"><img style="height: 40px"
                                                                                       class="img-fluid"
                                                                                       alt="Responsive image"
                                                                                       src="/images/cart.svg"
                                                                                       alt="https://www.flaticon.com/authors/freepik"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="<?= Yii::$app->homeUrl ?>user/update?id=<?= Yii::$app->user->id ?>"><img
+                                    style="height: 40px"
+                                    class="img-fluid"
+                                    alt="Responsive image"
+                                    src="/images/user.svg"
+                                    alt="https://www.flaticon.com/authors/freepik"></a>
                     </li>
 
                 </ul>
@@ -142,7 +151,11 @@ $this->params['categoriesDropdown'] = $categories
         </div>
     <?php endif; ?>
 </header>
-
+<!--<pre>-->
+<?php //if(empty(Yii::$app->user->identity['phoneNomber'])){
+//    echo 'empty';
+//};?>
+<!--</pre>-->
 <?= $content ?>
 
 <div class="connect">
@@ -184,7 +197,7 @@ $this->params['categoriesDropdown'] = $categories
             <div class="col-md-4">
                 <hr class="light">
                 <p style="overflow: hidden;" class="top-cover center-block">
-                    <a href="<? // Yii::$app->homeUrl ?>">
+                    <a href="<? Yii::$app->homeUrl ?>">
                         <img src="/images/logo.png" style="height: 100px" class="img-fluid rounded"
                              alt="Responsive image">
                     </a>

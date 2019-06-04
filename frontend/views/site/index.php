@@ -42,17 +42,21 @@ $this->params['categoriesDropdown'] = $categories;
 <div class="container-fluid padding">
     <div class="row text-center padding">
         <div class="col-xs-12 col-sm-6 col-md-4">
-            <i class="fa fa-american-sign-language-interpreting"></i>
+            <!--            <i class="fa fa-american-sign-language-interpreting"></i>-->
+            <img class="img" src="/images/brain/images (4).jpg" alt="">
             <h3>New 1</h3>
             <p>New1 Text</p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
-            <i class="fas fa-hands-helping"></i>
+            <!--            <i class="fa fa-hands-helping"></i>-->
+            <img class="img" src="/images/brain/images (5).jpg" alt="">
             <h3>New 2</h3>
             <p>New2 Text</p>
         </div>
         <div class="col-sm-12  col-md-4">
-            <i class="fas fa-hand-holding-heart"></i>
+            <!--            <i class="fa fa-hand-holding-heart"></i>-->
+            <img class="img" src="/images/brain/images (6).jpg" alt="">
+
             <h3>New 3</h3>
             <p>New3 Text</p>
         </div>

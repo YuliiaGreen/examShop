@@ -59,6 +59,38 @@ class User extends ActiveRecord implements IdentityInterface
             ['sex', 'in', 'range' => $this->getAllSex()],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['username', 'auth_key', 'password_hash', 'email', 'updated_at'], 'required'],
+            [['deleted_at', 'dateOfBirth'], 'safe'],
+            [['phoneNomber'], 'number'],
+            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['surname', 'fathersname', 'city'], 'string', 'max' => 50],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+            [['password_reset_token'], 'unique'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email' => 'Email',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'verification_token' => 'Verification Token',
+            'deleted_at' => 'Deleted At',
+            'sex' => 'Sex',
+            'surname' => 'Surname',
+            'fathersname' => 'Fathersname',
+            'dateOfBirth' => 'Date Of Birth',
+            'phoneNomber' => 'Phone Nomber',
+            'city' => 'City',
         ];
     }
 
@@ -216,7 +248,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
 //        $user = User::findOne($id);
 //        return $user->phoneNomber;
-        $this->phoneNomber;
+        return $this->phoneNomber;
     }
 
     public function getShoppingCarts()

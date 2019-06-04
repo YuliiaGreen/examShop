@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use app\models\Products;
+use common\models\Products;
 use app\models\ProductsShoppingCart;
 use common\models\User;
 use frontend\models\ShoppingCart;
@@ -96,18 +96,17 @@ class CartController extends \yii\web\Controller
         if ($shoppingCart->isNewRecord) {
             return $this->asJson(['status' => 'error']);
         } else {
-//            $userPhone=User::getUsersPhoneNumber(Yii::$app->user->id);
-//            if (!empty($userPhone)) {
+            if (!empty(Yii::$app->user->identity['phoneNomber'])) {
             $shoppingCart->status = 'approved';
             if ($shoppingCart->save()) {
                 Yii::$app->getSession()->setFlash('success',
                     'Дякуємо! Hомер Вашого замовлення <?=$id?> Найблищим часом з вами зв*яжеться наш менеджер для уточнення деталей покупки.');
                 return $this->render('success', ['id' => $shoppingCart->id]);
             }
-//        }
-//            else{
-//             echo 'kejfwkefj';
-//            }
+            } else {
+                Yii::$app->session->setFlash('error', 'Pfgjdyscnm jhfks');
+                return $this->render('/user/update', ['model' => Yii::$app->user->identity]);
+            }
         }
     }
 

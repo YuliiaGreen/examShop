@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use common\models\CategoriesSearch;
 use Yii;
-use app\models\Products;
+use common\models\Products;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\web\Controller;

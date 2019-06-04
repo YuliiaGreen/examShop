@@ -1,11 +1,13 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 use frontend\models\ShoppingCart;
 use yii\helpers\ArrayHelper;
-
+use app\models\Attributes;
+use app\models\AttributesValues;
+use app\models\ProductsMapping;
 /**
  * This is the model class for table "products".
  *

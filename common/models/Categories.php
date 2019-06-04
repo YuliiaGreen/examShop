@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use app\models\Products;
+use common\models\Products;
 use Yii;
 
 /**

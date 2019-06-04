@@ -3,7 +3,7 @@
 namespace app\models;
 
 use frontend\models\ShoppingCart;
-use app\models\Products;
+use common\models\Products;
 use Yii;
 
 /**

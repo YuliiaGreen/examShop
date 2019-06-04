@@ -18,7 +18,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use app\models\Products;
+use common\models\Products;
 
 /**
  * Site controller
@@ -86,6 +86,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->title = 'examShop';
         $categories = CategoriesSearch::getParentCategories();
 
         $products = Products::find()->where(['is', 'deleted_at', null])
@@ -104,7 +105,8 @@ class SiteController extends Controller
             'pages' => $pages,
             'pageList' => $this->pageList,
             'quantities' => $quantities,
-            'categories' => $categories
+            'categories' => $categories,
+
         ]);
 //        $products = Products::find()->where(['is', 'deleted_at', null])
 //            ->andWhere(['=', 'status', '1'])->all();
@@ -182,6 +184,7 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+
         return $this->render('about');
     }
 
@@ -341,7 +344,8 @@ class SiteController extends Controller
             ]);
     }
 
-//    public function actionAddProduct(){
-//
-//    }
+    protected function setMeta($title = null, $keywords = null, $description = null)
+    {
+        $this->view->title = $title;
+    }
 }
