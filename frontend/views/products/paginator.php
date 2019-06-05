@@ -20,7 +20,7 @@ $page = $page ?? 1;
     <ul class="pagination">
         <?php if ($page != 1): ?>
             <li class="pag p-2 m-2 ">
-                <a href="<?php echo preg_replace('@page=[\d]+@', 'page=' . ($page - 1), $baseUrl) ?>"
+                <a class="p-2 m-2" href="<?php echo preg_replace('@page=[\d]+@', 'page=' . ($page - 1), $baseUrl) ?>"
                    aria-label="Previous">
                     <span aria-hidden="true"> &laquo; </span>
                 </a>
@@ -28,14 +28,14 @@ $page = $page ?? 1;
         <?php endif; ?>
         <?php for ($i = 1; $i <= $limits['lastPage']; $i++): ?>
             <li class="<?= $i == $page ? 'active, border' : ''; ?>  p-2 m-2  pag  ">
-                <a href="<?= preg_replace('@page=[\d]+@', 'page=' . $i, $baseUrl, -1, $count) ?>">
+                <a class="p-2 m-2" href="<?= preg_replace('@page=[\d]+@', 'page=' . $i, $baseUrl, -1, $count) ?>">
                     <?= $i; ?>
                 </a>
             </li>
         <?php endfor; ?>
         <?php if ($page < $limits['lastPage']): ?>
             <li class=" pag p-2 m-2">
-                <a href="<?= preg_replace('@page=[\d]+@', 'page=' . ($page + 1), $baseUrl) ?>"
+                <a class="p-2 m-2" href="<?= preg_replace('@page=[\d]+@', 'page=' . ($page + 1), $baseUrl) ?>"
                    aria-label="Next">
                     <span aria-hidden="true"> &raquo; </span>
                 </a>

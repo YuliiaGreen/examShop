@@ -104,12 +104,13 @@ class CartController extends \yii\web\Controller
             if (!empty(Yii::$app->user->identity['phoneNomber'])) {
             $shoppingCart->status = 'approved';
             if ($shoppingCart->save()) {
+                $id = $shoppingCart->id;
                 Yii::$app->getSession()->setFlash('success',
-                    'Дякуємо! Hомер Вашого замовлення <?=$id?> Найблищим часом з вами зв*яжеться наш менеджер для уточнення деталей покупки.');
+                    'Дякуємо! Hомер Вашого замовлення $id Найблищим часом з вами зв*яжеться наш менеджер для уточнення деталей покупки.');
                 return $this->render('success', ['id' => $shoppingCart->id]);
             }
             } else {
-                Yii::$app->session->setFlash('error', 'Pfgjdyscnm jhfks');
+                Yii::$app->session->setFlash('error', 'Заповність дані для відправлення');
                 return $this->redirect('/user/update');
             }
         }
