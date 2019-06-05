@@ -12,6 +12,12 @@ class m190517_052351_table_images extends Migration
      */
     public function safeUp()
     {
+        $this->createTable('{{%images}}', [
+            'id' => $this->primaryKey(),
+            'title' => $this->string(225)->notNull(),
+            'path' => $this->text()->notNull(),
+            'alt' => $this->string(300),
+            'seo' => $this->integer()]);
 
     }
 
@@ -20,9 +26,8 @@ class m190517_052351_table_images extends Migration
      */
     public function safeDown()
     {
-        echo "m190517_052351_table_images cannot be reverted.\n";
+        $this->dropTable('{{%images}}');
 
-        return false;
     }
 
     /*

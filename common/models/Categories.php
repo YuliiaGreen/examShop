@@ -101,4 +101,10 @@ class Categories extends \yii\db\ActiveRecord
         return $this->hasMany(Products::className(), ['id' => 'products_id'])->viaTable('products_categories', ['categories_id' => 'id']);
     }
 
+    public function getAllCategoriesAsArray()
+    {
+        $categories = Categories::find()->all();
+        $dropdownData = \yii\helpers\ArrayHelper::map($categories, 'id', 'title');
+        return $dropdownData;
+    }
 }

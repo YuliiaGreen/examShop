@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
+use yii\web\UploadedFile;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -27,6 +28,9 @@ class ProductsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
         ];
     }
 
@@ -79,10 +83,16 @@ class ProductsController extends Controller
 
         } else {
             $model = new Products();
-//            echo'<pre>';
-//            var_dump( $model->getRelatedAttributesValues()[1]);
-//            echo'<pre>';
+
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                $model->image = UploadedFile::getInstance($model, 'image');
+                if ($model->image) {
+                    $model->upload();
+                }
+                unset($model->image);
+                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
+                $model->uploadGalery();
+                Yii::$app->session->setFlash('success', 'Товар успішно створнений');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
@@ -109,7 +119,18 @@ class ProductsController extends Controller
 
         } else {
             $model = $this->findModel($id);
+
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                $model->image = UploadedFile::getInstance($model, 'image');
+                if ($model->image) {
+                    $model->upload();
+                }
+                unset($model->image);
+                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
+                if (!empty($model->galery)) {
+                    $model->uploadGalery();
+                }
+                Yii::$app->session->setFlash('success', 'Редаговано');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
@@ -119,6 +140,7 @@ class ProductsController extends Controller
                 'statusList' => $model->getStatusList()
             ]);
         }
+
     }
 
     /**

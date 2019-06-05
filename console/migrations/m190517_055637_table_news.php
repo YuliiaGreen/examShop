@@ -34,7 +34,7 @@ class m190517_055637_table_news extends Migration
     public function safeDown()
     {
         $this->dropTable('{{%news}}');
-        return false;
+
     }
 
     /*

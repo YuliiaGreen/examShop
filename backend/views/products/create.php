@@ -18,25 +18,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="products-form">
 
-
-        <?php $form = ActiveForm::begin(); ?>
-
-        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-        <!--   випадаючий список-->
-        <?= $form->field($model, 'selected_categories')->dropDownList($dropdownData, ['multiple' => 'multiple']) ?>
-        <!--    /випадаючий список-->
-
-        <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-
-        <?= $form->field($model, 'price')->textInput() ?>
-
-        <?= $form->field($model, 'image_id')->textInput() ?>
-
-        <?= $form->field($model, 'status')->dropDownList($statusList) ?>
-
+    <?= $this->render('_form', [
+        'model' => $model,
+        'dropdownData' => $dropdownData,
+        'statusList' => $statusList,
+        'attributesData' => $attributesData,
+    ]) ?>
+    <!--    <div class="products-form">-->
+    <!---->
+    <!---->
+    <!--        --><?php //$form = ActiveForm::begin(['options' => ['enctype'=>'multipart/from-data']]); ?>
+    <!---->
+    <!--        --><? //= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <!---->
+    <!--           випадаючий список-->-->
+    <!--        --><? //= $form->field($model, 'selected_categories')->dropDownList($dropdownData, ['multiple' => 'multiple']) ?>
+    <!--          /випадаючий список-->-->
+    <!---->
+    <!--        --><? //= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
+    <!---->
+    <!--        --><? //= $form->field($model, 'price')->textInput() ?>
+    <!---->
+    <!--        --><? //= $form->field($model, 'image_id')->textInput() ?>
+    <!---->
+    <!---->
+    <!--        --><? //= $form->field($model, 'status')->dropDownList($statusList) ?>
+    <!--    </div>-->
         <!--        <div class="dynamic-attributes">-->
         <!--            <div class="add-attributes border">+</div>-->
         <!--            --><?php
@@ -58,13 +66,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <!--            </div>-->
         <!--        </div>-->
 
-        <div class="form-group">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-        </div>
-
-        <?php ActiveForm::end(); ?>
-
-    </div>
+    <!--        <div class="form-group">-->
+    <!--            --><? //= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <!--        </div>-->
+    <!---->
+    <!--        --><?php //ActiveForm::end(); ?>
+    <!---->
+    <!--    </div>-->
 
 
 </div>

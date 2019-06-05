@@ -77,7 +77,7 @@ class CartController extends \yii\web\Controller
             return Yii::$app->response->redirect('site/login');
         } else {
             $cart = ShoppingCart::findLastCart();
-            print_r($cart);
+//            print_r($cart);
             if (empty($cart->products)) {
                 Yii::$app->session->setFlash('info', 'Cart is empty');
             }
@@ -106,8 +106,8 @@ class CartController extends \yii\web\Controller
             if ($shoppingCart->save()) {
                 $id = $shoppingCart->id;
                 Yii::$app->getSession()->setFlash('success',
-                    'Дякуємо! Hомер Вашого замовлення $id Найблищим часом з вами зв*яжеться наш менеджер для уточнення деталей покупки.');
-                return $this->render('success', ['id' => $shoppingCart->id]);
+                    "Дякуємо! Hомер Вашого замовлення {$shoppingCart->id} Найблищим часом з вами зв*яжеться наш менеджер для уточнення деталей покупки.");
+                return $this->redirect('/site/index');
             }
             } else {
                 Yii::$app->session->setFlash('error', 'Заповність дані для відправлення');

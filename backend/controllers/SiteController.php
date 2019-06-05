@@ -2,11 +2,14 @@
 
 namespace backend\controllers;
 
+use common\models\Images;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -30,6 +33,13 @@ class SiteController extends Controller
                         'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
+
+                    ],
+                    [
+                        'actions' => ['upload'],
+                        'allow' => true,
+                        'roles' => ['@'],
+
                     ],
                 ],
             ],
@@ -99,5 +109,25 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionUpload()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        } else {
+            $model = new UploadForm();
+            if (Yii::$app->request->isPost) {
+                $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
+                print_r($model);
+                if ($model->upload()) {
+
+                    Yii::$app->session->setFlash('success', 'Зображення успішно завантажено на сервер');
+                    return $this->redirect(Yii::$app->homeUrl);
+                }
+            }
+
+            return $this->render('upload', ['model' => $model]);
+        }
     }
 }

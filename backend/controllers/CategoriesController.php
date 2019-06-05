@@ -8,6 +8,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+
 
 /**
  * CategoriesController implements the CRUD actions for Categories model.
@@ -26,6 +28,9 @@ class CategoriesController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
         ];
     }
 
@@ -78,8 +83,16 @@ class CategoriesController extends Controller
 
         } else {
             $model = new Categories();
-//            $app\models\Categories::find()->asArray()->all()]
+
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                $model->image = UploadedFile::getInstance($model, 'image');
+                if ($model->image) {
+                    $model->upload();
+                }
+                unset($model->image);
+                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
+                $model->uploadGalery();
+                Yii::$app->session->setFlash('success', 'Категорія успішно створнена');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
@@ -105,6 +118,15 @@ class CategoriesController extends Controller
         } else {
             $model = $this->findModel($id);
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                $model->image = UploadedFile::getInstance($model, 'image');
+                if ($model->image) {
+                    $model->upload();
+                }
+                unset($model->image);
+                $model->galery[] = UploadedFile::getInstances($model, 'galery');
+                $model->uploadGalery();
+                Yii::$app->session->setFlash('success', 'Дані категорії успішно оновлені');
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
@@ -128,7 +150,8 @@ class CategoriesController extends Controller
             return Yii::$app->response->redirect(['site/login']);
 
         } else {
-            $this->findModel($id)->delete();
+            $model = $this->findModel($id);
+            $model->delete();
 
             return $this->redirect(['index']);
         }
@@ -149,5 +172,19 @@ class CategoriesController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    protected function actionRestore($id)
+    {
+        $category = Categories::findOne($id);
+        if ($category instanceof Products) {
+            $category->deleted_at = null;
+            $category->status = 1;
+
+            if ($category->save()) {
+                return Yii::$app->response->redirect(['category/view', 'id' => $id], 302);
+            }
+        }
+    }
+
 
 }

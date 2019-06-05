@@ -52,6 +52,7 @@ AppAsset::register($this);
             ['label' => 'Users', 'url' => ['/users/index']],
             ['label' => 'Attributes', 'url' => ['/attributes/index']],
             ['label' => 'AttributesValues', 'url' => ['/attributes-values/index']],
+            ['label' => 'UploadImg', 'url' => ['/site/upload']],
         ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

@@ -13,14 +13,15 @@ use yii\helpers\ArrayHelper;
 
     <? //= var_dump($categories);?>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-    <?= $form->field($model, 'parent_id')->dropDownList($categories) ?>
+    <?= $form->field($model, 'parent_id')->dropDownList($categories, ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'image_id')->textInput() ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
+    <?= $form->field($model, 'galery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <?= $form->field($model, 'status')->dropDownList(['1' => 'ACTIVE', '0' => 'INACTIVE']) ?>
 
@@ -29,5 +30,8 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <?php ActiveForm::end(); ?>
+    <?= '<pre>'; ?>
+    <?php print_r($_FILES); ?>
+    <?= '</pre>'; ?>
 
 </div>

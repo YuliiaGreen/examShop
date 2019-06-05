@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]);
         ?>
+        <?php $img = $model->getImage(); ?>
         <?php
         if ($model->deleted_at !== null) {
             echo Html::a('Restore', ['restore', 'id' => $model->id], [
@@ -41,7 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'body:ntext',
             'price',
-            'image_id',
+            ['attribute' => 'image',
+                'value' => "<img src='{$img->getUrl()}'>",
+                'format' => 'html'
+            ],
             'status',
             'created_at',
             'updated_at',
