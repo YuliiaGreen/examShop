@@ -5,6 +5,8 @@
 /* @var $quantity frontend/controller/Cart Controller */
 
 use frontend\models\ShoppingCart;
+
+$img = $cart->getImage();
 ?>
 <div class="container-fluid padding text-center">
     <div class="row text-center padding align-content-between">
@@ -29,11 +31,12 @@ use frontend\models\ShoppingCart;
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">img</th>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Total</th>
+            <th scope="col">Зображення</th>
+            <th scope="col">Назва</th>
+            <th scope="col">Ціна, $</th>
+            <th scope="col">Кількість</th>
+            <th scope="col">Сума, $</th>
+            <th scope="col">Видалити</th>
         </tr>
         </thead>
         <tbody>
@@ -43,24 +46,27 @@ use frontend\models\ShoppingCart;
             foreach ($cart->products as $item):?>
                 <tr>
                     <th scope="row"><?= $i ?></th>
-                    <th scope="row">img</th>
+                    <th scope="row"><a href=""><img src="<?= $img->getUrl() ?>" alt=""></a></th>
                     <td><a href="../products/view?id=<?= $item->id ?>"><?= $item->title ?></a></td>
                     <td><?= $item->price ?></td>
                     <td><?= $quantity[$item->id] ?></td>
                     <td><?= $item->price * $quantity[$item->id] ?></td>
+                    <td><?= \yii\helpers\Html::a('Видалити', ['cart/del-product', 'id' => $item->id]) ?></td>
                 </tr>
                 <?php
                 $sum += $item->price * $quantity[$item->id];
                 $i++;
             endforeach; ?>
         <?php endif; ?>
+
+
         <tr>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td>Total:</td>
-            <td> <?= $sum; ?></td>
+            <td>Всього:</td>
+            <td> <?= $sum; ?> </td>
         </tr>
         </tbody>
     </table>

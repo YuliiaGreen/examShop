@@ -26,6 +26,7 @@ class ProductsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'restore' => ['GET']
                 ],
             ],
             'image' => [
@@ -89,9 +90,9 @@ class ProductsController extends Controller
                 if ($model->image) {
                     $model->upload();
                 }
-//                unset($model->image);
-//                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
-//                $model->uploadGalery();
+                unset($model->image);
+                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
+                $model->uploadGalery();
                 Yii::$app->session->setFlash('success', 'Товар успішно створнений');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -179,16 +180,21 @@ class ProductsController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    protected function actionRestore($id)
+    public function actionRestore($id)
     {
+//        dd(123);
         $product = Products::findOne($id);
         if ($product instanceof Products) {
             $product->deleted_at = null;
             $product->status = 1;
-
+//            $product->save();
+//            dd($product->save());
             if ($product->save()) {
+                Yii::$app->session->setFlash('success', 'Відновлено!');
                 return Yii::$app->response->redirect(['products/view', 'id' => $id], 302);
             }
+            Yii::$app->session->setFlash('error', 'Щось пішло не так=(');
+            return Yii::$app->response->redirect(['products/view', 'id' => $id], 302);
         }
     }
 

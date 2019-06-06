@@ -137,10 +137,94 @@ class CartController extends \yii\web\Controller
 
     }
 
-    public function actionPhone()
+    public function actionDelProduct($id)
     {
-        print_r(Yii::$app->user->phoneNomber);
+
+        $product = Products::findOne($id);
+
+        $shoppingCart = ShoppingCart::findLastCart();
+        if ($shoppingCart->isNewRecord) {
+            return $this->redirect('/');
+        }
+        if ($product && $shoppingCart->deleteProductFromCart($product)) {
+            //todo:: make this work for success status either
+//            return $this->asJson(['status' => 'success']); //if we need to get data with help AJAX.
+
+            Yii::$app->session->setFlash('success', 'thanks, product successfully added to your card');
+
+
+            return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+
+        }
+
+        if (Yii::$app->request->isAjax) {
+            return $this->asJson(['status' => 'error']);
+        } else {
+            Yii::$app->session->setFlash('error', 'sorry, we can\'t add this product to your cart');
+            return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+        }
 
     }
+
+    public function actionPhone()
+    {
+        return Yii::$app->user->phoneNomber;
+
+    }
+
+    public function actionLessProduct($id)
+    {
+
+        $product = Products::findOne($id);
+
+        $shoppingCart = ShoppingCart::findLastCart();
+        if ($shoppingCart->isNewRecord) {
+            return $this->redirect('/');
+
+        }
+        if ($product && $shoppingCart->lessQuantityFromCart($product)) {
+
+            Yii::$app->session->setFlash('success', 'thanks, product successfully added to your card');
+
+
+            return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+
+        }
+
+        if (Yii::$app->request->isAjax) {
+            return $this->asJson(['status' => 'error']);
+        } else {
+            Yii::$app->session->setFlash('error', 'sorry, we can\'t add this product to your cart');
+            return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+        }
+    }
+
+    public function actionMoreProduct($id)
+    {
+
+        $product = Products::findOne($id);
+
+        $shoppingCart = ShoppingCart::findLastCart();
+        if ($shoppingCart->isNewRecord) {
+            return $this->redirect('/');
+
+        }
+
+        if ($product && $shoppingCart->moreQuantityToCart($product)) {
+
+            Yii::$app->session->setFlash('success', 'thanks, product successfully added to your card');
+
+            return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+
+        }
+        if (Yii::$app->request->isAjax) {
+            return $this->asJson(['status' => 'error']);
+        } else {
+            Yii::$app->session->setFlash('error', 'sorry, we can\'t add this product to your cart');
+            return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+        }
+
+    }
+
 }
 

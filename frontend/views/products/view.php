@@ -5,7 +5,8 @@ use yii\helpers\Html;
 /*@var $categories -tree categories*/
 /*@var $model- product*/
 
-
+$img = $product->getImage();
+//print_r($img)
 ?>
 
 
@@ -13,7 +14,7 @@ use yii\helpers\Html;
     <div class="row text-center padding align-content-between border m-2">
         <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto flex-wrap">
             <div class="image ">
-                <a href=""><img src="/images/logo.png" alt=""></a>
+                <a href=""><img src="<?= $img->getUrl() ?>" alt=""></a>
             </div>
         </div>
 

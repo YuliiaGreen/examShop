@@ -98,7 +98,7 @@ AppAsset::register($this);
         //    for()
         //     $('#products-attributes_value');
         // })
-    }
+    // }
 </script>
 <?php $this->endBody() ?>
 </body>

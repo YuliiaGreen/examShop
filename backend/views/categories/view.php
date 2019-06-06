@@ -43,10 +43,12 @@ $this->params['breadcrumbs'][] = $this->title;
 //        'updated_at',
 //        'deleted_at',
 //    ],
-//]) ?>
+//])
+$img = $model->getImage(); ?>
 
 <div class="col container-fluid padding text-center">
     <table class="table col-10 m-auto">
+        <a href=""><img src="<?= $img->getUrl() ?>" alt=""></a>
         <thead class="thead-dark">
         <tr>
             <th scope="col">id</th>
@@ -61,6 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <tbody>
         <?php if (!empty($model)): ?>
             <tr>
+
                 <td><?= $model->id ?></td>
                 <td><a href="../categories/view?id=<?= $model->id ?>"><?= $model->title ?></a></td>
                 <td><?= $model->body ?></td>

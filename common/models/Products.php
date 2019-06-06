@@ -60,7 +60,7 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'body', 'price', 'selected_categories'], 'required'],
+            [['title', 'body', 'price'], 'required'],
             [['body'], 'string'],
             [['price', 'status', 'created_at', 'updated_at', 'deleted_at', 'seo'], 'integer'],
             [['title'], 'string', 'max' => 225],

@@ -20,8 +20,8 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'parent_id')->dropDownList($categories, ['prompt' => '']) ?>
     <!---->
-    <!--    --><? //= $form->field($model, 'image')->fileInput() ?>
-    <!--    --><? //= $form->field($model, 'galery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
+    <?= $form->field($model, 'galery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <?= $form->field($model, 'status')->dropDownList(['1' => 'ACTIVE', '0' => 'INACTIVE']) ?>
 

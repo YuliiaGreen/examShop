@@ -100,10 +100,10 @@ class CategoriesController extends Controller
             $model = new Categories();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//                $model->image = UploadedFile::getInstance($model, 'image');
-//                if ($model->image) {
-//                    $model->upload();
-//                }
+                $model->image = UploadedFile::getInstance($model, 'image');
+                if ($model->image) {
+                    $model->upload();
+                }
 //                unset($model->image);
 //                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
 //                $model->uploadGalery();

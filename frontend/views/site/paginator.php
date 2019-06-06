@@ -19,7 +19,7 @@ $page = $page ?? 1;
     <!--    any address wuth ? page:=int|| nul-->
     <ul class="pagination">
         <?php if ($page != 1): ?>
-            <li class="pag p-2 m-2 ">
+            <li class="pag p-2 m-2  ">
                 <a class="p-2 m-2" href="<?php echo preg_replace('@page=[\d]+@', 'page=' . ($page - 1), $baseUrl) ?>"
                    aria-label="Previous">
                     <span aria-hidden="true"> &laquo; </span>
@@ -27,7 +27,7 @@ $page = $page ?? 1;
             </li>
         <?php endif; ?>
         <?php for ($i = 1; $i <= $limits['lastPage']; $i++): ?>
-            <li class="<?= $i == $page ? 'active, border' : ''; ?>  p-2 m-2  pag  ">
+            <li class="<?= $i === $page ? 'active border' : ''; ?>  p-2 m-2  pag  ">
                 <a class="p-2 m-2" href="<?= preg_replace('@page=[\d]+@', 'page=' . $i, $baseUrl, -1, $count) ?>">
                     <?= $i; ?>
                 </a>
@@ -42,4 +42,4 @@ $page = $page ?? 1;
             </li>
         <?php endif; ?>
     </ul>
-
+<?php if (Yii::$app->session->get('page')) ?>

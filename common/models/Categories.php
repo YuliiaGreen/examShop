@@ -49,8 +49,8 @@ class Categories extends \yii\db\ActiveRecord
             [['image_id', 'parent_id', 'status', 'created_at', 'updated_at', 'deleted_at', 'seo'], 'integer'],
             [['title'], 'string', 'max' => 225],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['parent_id' => 'id']],
-//            [['image'], 'file', 'extensions' => 'png, jpg'],
-//            [['galery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4]
+            [['image'], 'file', 'extensions' => 'png, jpg'],
+            [['galery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4]
 
         ];
     }
@@ -75,6 +75,14 @@ class Categories extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -123,16 +131,16 @@ class Categories extends \yii\db\ActiveRecord
         return true;
     }
 
-//    public function upload()
-//    {
-//        if ($this->validate()) {
-//            $path = 'uploads/store/' . $this->image->baseName . '.' . $this->image->extension;
-//            $this->image->saveAs($path);
-//            $this->attachImage($path);
-//            @unlink($path);
-//            return true;
-//        } else return false;
-//    }
+    public function upload()
+    {
+        if ($this->validate()) {
+            $path = 'uploads/store/' . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($path);
+            $this->attachImage($path);
+            @unlink($path);
+            return true;
+        } else return false;
+    }
 //
 //    public function uploadGalery()
 //    {
