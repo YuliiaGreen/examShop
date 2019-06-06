@@ -68,7 +68,7 @@ class ProductsController extends Controller
             'products' => $products->limit($quantities)->offset($quantities * ($page - 1))->all(),
             'page' => $page,
             'quantities' => $quantities,
-            'limits' => ['elements' => $limits, 'lastPage' => round($limits / $quantities)]
+            'limits' => ['elements' => $limits, 'lastPage' => ($limits / $quantities)]
         ]);
 //        }
     }

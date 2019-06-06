@@ -72,7 +72,8 @@ class CategoriesController extends Controller
             $page = 1;
         }
         $id = Yii::$app->request->get('id');
-        $category = Categories::find()->with('products')->where(['id' => $id])->one();
+        $category = Categories::find()->where(['id' => $id])->one();
+        $children = Categories::find()->where(['parent_id' => $id])->all();
 //        print_r( $category);
 //        $model = new Categories;
 //        $products = $category->products;
@@ -85,7 +86,7 @@ class CategoriesController extends Controller
 //            }
 //            dd($temp);
         return $this->render('view', [
-//            'products' => $products,
+            'children' => $children,
             'product' => $category,
             'categories' => CategoriesSearch::getParentCategories(),
 

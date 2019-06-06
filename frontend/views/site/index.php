@@ -40,10 +40,11 @@ $this->params['categoriesDropdown'] = $categories;
 </div>
 <!--three column section-->
 <div class="container-fluid padding">
-    <div class="row text-center padding">
-        <div class="col-xs-12 col-sm-6 col-md-4">
+    <hr class="my-4">
+    <div class="row text-center ">
+        <div class="col-xs-12 col-sm-6 col-md-4 m-t-2">
             <!--            <i class="fa fa-american-sign-language-interpreting"></i>-->
-            <img class="img" src="/images/brain/images (4).jpg" alt="">
+            <img class="img p-t-2" src="/images/brain/images (4).jpg" alt="">
             <h3>New 1</h3>
             <p>New1 Text</p>
         </div>
@@ -66,11 +67,13 @@ $this->params['categoriesDropdown'] = $categories;
 <!--/three column section-->
 
 <div class="container-fluid padding text-center">
+    <h2> Нові поступлення</h2>
+
     <div class="row text-center padding align-content-between">
-        <?php foreach ($products
+        <?php foreach ($new
 
         as $product): ?>
-        <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto flex-wrap">
+        <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center m-auto flex-wrap">
             <!--<div class="overflow-auto pos-absolute">-->
             <!--<div class="row text-center padding align-content-between">-->
             <!--    <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto ">-->
@@ -96,10 +99,41 @@ $this->params['categoriesDropdown'] = $categories;
     </div>
     <!--    </div>-->
     <?php endforeach; ?>
+    <hr class="my-4">
 </div>
+<div class="container-fluid padding text-center">
+    <h2>Всі товари</h2>
+    <div class="row text-center padding align-content-between">
+        <?php foreach ($products
 
+        as $product): ?>
+        <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto flex-wrap">
+            <div class=" ">
+                <div class="image ">
+                    <a href=""><img src="/images/logo.png" alt=""></a>
+                </div>
+                <div class="d-flex flex-column text-center">
+                    <div class="name align-self-center  text-center">
+                        <a href="/products/view?id=<?= $product->id ?>">
+                            <?= $product->title ?>
+                        </a
+                    </div>
+                    <div class="description align-self-center text-center"><span><?= $product->body ?></span>
+                    </div>
+                    <div class="price align-self-center text-center"><span>Price</span><?= $product->price ?>
+                    </div>
+                </div>
+                <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
+                    ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+</div>
+<?php //print_r($pageList);?>
 <div class="col">
-    <form action="/site" class="select-quantity-form">
+    <form action="" class="select-quantity-form">
         <select name="quantities" id="">
             <?php foreach ($pageList as $key): ?>
                 <option value="<?= $key ?>"
@@ -113,11 +147,35 @@ $this->params['categoriesDropdown'] = $categories;
 </div>
 <div class="container-fluid padding text-center">
 
-    <?= LinkPager::widget([
-        'pagination' => $pages,
-        'class' => 'text-center'
-    ]); ?>
+
+    <?php echo $this->render('paginator', [
+        'limits' => $limits,
+        'page' => $page]);
+
+    ?>
+
 </div>
+<!---->
+<!--<div class="col">-->
+<!--    <form action="/site" class="select-quantity-form">-->
+<!--        <select name="quantities" id="">-->
+<!--            --><?php //foreach ($pageList as $key): ?>
+<!--                <option value="--><? //= $key ?><!--"-->
+<!--                    --><?php //if ($key === $quantities) echo 'selected' ?><!--
+                   --><? //= $key ?>
+<!--                </option>-->
+<!--            --><?php //endforeach; ?>
+<!--        </select>-->
+<!--    </form>-->
+<!---->
+<!--</div>-->
+<!--<div class="container-fluid padding text-center">-->
+<!---->
+<!--    --><? //= LinkPager::widget([
+//        'pagination' => $pages,
+//        'class' => 'text-center'
+//    ]); ?>
+<!--</div>-->
 
 <!--</div>-->
 
@@ -130,20 +188,6 @@ $this->params['categoriesDropdown'] = $categories;
 //                    ['target' => "_blank"]) ?>
 
 
-<!--<script src="js/jquery-3.2.1.min.js"></script>-->
-<!--<script src="styles/bootstrap-4.1.2/popper.js"></script>-->
-<!--<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>-->
-<!--<script src="plugins/greensock/TweenMax.min.js"></script>-->
-<!--<script src="plugins/greensock/TimelineMax.min.js"></script>-->
-<!--<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>-->
-<!--<script src="plugins/greensock/animation.gsap.min.js"></script>-->
-<!--<script src="plugins/greensock/ScrollToPlugin.min.js"></script>-->
-<!--<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>-->
-<!--<script src="plugins/easing/easing.js"></script>-->
-<!--<script src="plugins/progressbar/progressbar.min.js"></script>-->
-<!--<script src="plugins/parallax-js-master/parallax.min.js"></script>-->
-<!--<script src="js/custom.js"></script>-->
-<!--<script>-->
 <!--    window.onload = function () {-->
 <!--        $('.addProdToCart').on('click', function (ev) {-->
 <!--            ev.preventDefault();-->

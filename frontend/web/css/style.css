@@ -156,7 +156,8 @@ footer {
 }
 
 .pag {
-    background-color: #3f3f3f;
+    background-color: #dbe0ff;
+    color: black;
 }
 main {
     clear: both;

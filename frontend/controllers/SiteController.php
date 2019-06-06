@@ -84,29 +84,32 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+
     public function actionIndex()
     {
         $this->view->title = 'examShop';
         $categories = CategoriesSearch::getParentCategories();
+        $new = Products::find()->where(['is', 'deleted_at', null])
+            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_DESC])->limit(3)->all();
 
         $products = Products::find()->where(['is', 'deleted_at', null])
-            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_DESC]);
-        $totalCount = $products->count();
+            ->andWhere(['=', 'status', '1']);
+        $page = Yii::$app->request->get('page') ?? 1;
         $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
             ?? self::ITEM_QUANTITY;
-        $pages = new Pagination(['totalCount' => $totalCount, 'pageSize' => $quantities, 'forcePageParam' => false
-            , 'pageSizeParam' => false
-        ]);
-        $models = $products->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        if ($page < 1 && !is_numeric($page)) {
+            $page = 1;
+        }
+        $limits = $products->count();
+
         return $this->render('index', [
-            'products' => $models,
-            'pages' => $pages,
+            'new' => $new,
+            'products' => $products->limit($quantities)->offset($quantities * ($page - 1))->all(),
+            'page' => $page,
             'pageList' => $this->pageList,
             'quantities' => $quantities,
             'categories' => $categories,
-
+            'limits' => ['elements' => $limits, 'lastPage' => ($limits / $quantities)]
         ]);
 //        $products = Products::find()->where(['is', 'deleted_at', null])
 //            ->andWhere(['=', 'status', '1'])->all();
@@ -313,32 +316,48 @@ class SiteController extends Controller
     public function actionSearch($param)
     {
         $categories = CategoriesSearch::getParentCategories();
-
-        $products = Products::find()->where(['like', 'title', $param])
-            ->orWhere(['like', 'body', $param])
-            ->all();
+        $new = Products::find()->where(['is', 'deleted_at', null])
+            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_DESC])->limit(3)->all();
         $query = Products::find()->where(['like', 'title', $param])
             ->orWhere(['like', 'body', $param]);
-        $totalCount = $query->count();
+        $products = Products::find()->where(['like', 'title', $param])
+            ->orWhere(['like', 'body', $param])->all();
         $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
             ?? self::ITEM_QUANTITY;
-        $pages = new Pagination(['totalCount' => $totalCount, 'pageSize' => $quantities]);
-        $models = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        $page = Yii::$app->request->get('page') ?? 1;
+        if ($page < 1 && !is_numeric($page)) {
+            $page = 1;
+        }
+        $limits = $query->count();
+
+//        $query = Products::find()->where(['like', 'title', $param])
+//            ->orWhere(['like', 'body', $param]);
+//        $totalCount = $query->count();
+//        $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
+//            ?? self::ITEM_QUANTITY;
+//        $pages = new Pagination(['totalCount' => $totalCount, 'pageSize' => $quantities]);
+//        $models = $query->offset($pages->offset)
+//            ->limit($pages->limit)
+//            ->all();
 //        print_r($products);
+//  dd($products);
         if (empty($products)) {
             Yii::$app->session->setFlash('error', 'За вашим запитом нічого не знайдено.');
             return $this->render('index', [
-                'products' => $products,
-                'pages' => $pages,
+                'new' => $new,
+                'limits' => ['elements' => $limits, 'lastPage' => ($limits / $quantities)],
+                'products' => $products->limit($quantities)->offset($quantities * ($page - 1))->all(),
+                'page' => $page,
                 'pageList' => $this->pageList,
                 'quantities' => $quantities,
                 'categories' => $categories]);
         } else
+//            dd($products);
             return $this->render('index', [
+                'new' => $new,
+                'limits' => ['elements' => $limits, 'lastPage' => ($limits / $quantities)],
                 'products' => $products,
-                'pages' => $pages,
+                'page' => $page,
                 'pageList' => $this->pageList,
                 'quantities' => $quantities,
                 'categories' => $categories

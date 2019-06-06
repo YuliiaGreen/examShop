@@ -77,6 +77,8 @@ $this->params['categoriesDropdown'] = $categories
                                 <li class="nav-item">
                                     <a class="nav-link"
                                        href="<?= Yii::$app->homeUrl ?>categories/view?id=<?= $category->id ?>"><?= $category->title ?></a>
+                                    <!--                                       href="#-->
+                                    <? //= $category->title ?><!--">--><? //= $category->title ?><!--</a>-->
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -240,12 +242,40 @@ $this->params['categoriesDropdown'] = $categories
     }
 </script>
 <script>
+    // window.onload = function () {
+    //     var attribute = $('.dynamic-attributes .single-attribute').html();
+    //     $('.dynamic-attributes .add-attribute').on('click', function () {
+    //         $('.dynamic-attributes').append(attribute);
+    //     });
+    // }
+</script>
+<script>
     window.onload = function () {
-        var attribute = $('.dynamic-attributes .single-attribute').html();
-        $('.dynamic-attributes .add-attribute').on('click', function () {
-            $('.dynamic-attributes').append(attribute);
-        });
+        var page =<?=$page - 1?>;
+        $('btn.btn-success.prev-page').on('click', function (ev) {
+            ev.preventDefault();
+            $.get('/products/index?page=' + page + '&quantities=<?=$quantities?>, function (msg) {
+            page--;
+            console.log(msg);
+            // if (msg.status === 'error') {
+            //     $('.ajax-response').html('Product can not be added to the cart');
+            // } else {
+            //     $('.ajax-response').html('Product added to the cart');
+        }
     }
+    )
+
+    }
+    $('btn.btn-success.next-page').on('click', function (ev) {
+        ev.preventDefault();
+        $.get('/products/index?page=<?=($page + 1)?>&quantities=<?=$quantities?>, function (msg) {
+        // if (msg.status === 'error') {
+        //     $('.ajax-response').html('Product can not be added to the cart');
+        // } else {
+        //     $('.ajax-response').html('Product added to the cart');
+        // }
+    })
+
 </script>
 <?php $this->endBody() ?>
 </body>

@@ -35,7 +35,7 @@ class Products extends \yii\db\ActiveRecord
 //    public $attribute;
 //    public $attributes_value;
     public $image;
-    public $galery;
+//    public $galery;
 
 
     /**
@@ -66,7 +66,7 @@ class Products extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 225],
             [['selected_categories', 'statusList'], 'safe'],
             [['image'], 'file', 'extensions' => 'png, jpg'],
-            [['galery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4]
+//            [['galery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4]
 
 //            TODO validate is integer
         ];
@@ -203,16 +203,16 @@ class Products extends \yii\db\ActiveRecord
         } else return false;
     }
 
-    public function uploadGalery()
-    {
-        if ($this->validate()) {
-            foreach ($this->galery as $file) {
-                $path = 'uploads/store/' . $file->baseName . '.' . $file->extension;
-                $file->saveAs($path);
-                $this->attachImage($path);
-                @unlink($path);
-            }
-            return true;
-        } else return false;
-    }
+//    public function uploadGalery()
+//    {
+//        if ($this->validate()) {
+//            foreach ($this->galery as $file) {
+//                $path = 'uploads/store/' . $file->baseName . '.' . $file->extension;
+//                $file->saveAs($path);
+//                $this->attachImage($path);
+//                @unlink($path);
+//            }
+//            return true;
+//        } else return false;
+//    }
 }

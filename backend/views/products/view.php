@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Products */
 
 $this->title = $model->title;
+
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -14,6 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="products-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <!--    <p> Категорія: --><? //=$model->selected_categories ?><!--</p>-->
+    <p> Створено: <?= date('Y:m:d', $model->created_at) ?></p>
+    <p> Видалено: <?= (empty($model->deleted_at)) ? '-' : date('Y:m:d', $model->deleted_at) ?></p>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -47,9 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html'
             ],
             'status',
-            'created_at',
-            'updated_at',
-            'deleted_at',
+//            'created_at',
+//            'updated_at',
+//            'deleted_at',
         ],
     ]) ?>
 

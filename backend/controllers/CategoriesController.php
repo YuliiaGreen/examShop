@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Categories;
+use common\models\Categories;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -53,6 +53,21 @@ class CategoriesController extends Controller
             ]);
         }
     }
+//    public function actionIndex()
+//    {
+//        if (Yii::$app->user->isGuest) {
+//            return Yii::$app->response->redirect(['site/login']);
+//
+//        } else {
+////            $dataProvider = new ActiveDataProvider([
+////                'query' => Categories::find(),
+////            ]);
+//
+//            return $this->render('index', [
+//                'dataProvider' => Categories::find()->all(),
+//            ]);
+//        }
+//    }
 
     /**
      * Displays a single Categories model.
@@ -85,13 +100,13 @@ class CategoriesController extends Controller
             $model = new Categories();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $model->image = UploadedFile::getInstance($model, 'image');
-                if ($model->image) {
-                    $model->upload();
-                }
-                unset($model->image);
-                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
-                $model->uploadGalery();
+//                $model->image = UploadedFile::getInstance($model, 'image');
+//                if ($model->image) {
+//                    $model->upload();
+//                }
+//                unset($model->image);
+//                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
+//                $model->uploadGalery();
                 Yii::$app->session->setFlash('success', 'Категорія успішно створнена');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -118,13 +133,13 @@ class CategoriesController extends Controller
         } else {
             $model = $this->findModel($id);
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $model->image = UploadedFile::getInstance($model, 'image');
-                if ($model->image) {
-                    $model->upload();
-                }
-                unset($model->image);
-                $model->galery[] = UploadedFile::getInstances($model, 'galery');
-                $model->uploadGalery();
+//                $model->image = UploadedFile::getInstance($model, 'image');
+//                if ($model->image) {
+//                    $model->upload();
+//                }
+//                unset($model->image);
+//                $model->galery[] = UploadedFile::getInstances($model, 'galery');
+//                $model->uploadGalery();
                 Yii::$app->session->setFlash('success', 'Дані категорії успішно оновлені');
 
                 return $this->redirect(['view', 'id' => $model->id]);

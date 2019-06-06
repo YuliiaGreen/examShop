@@ -11,10 +11,6 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="products-form">
-    <?= '<pre>' ?>
-    <? //= print_r($model);?>
-    <? //= print_r($_FILES);?>
-    <?= '</pre>' ?>
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
@@ -29,7 +25,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'price')->textInput() ?>
 
     <?= $form->field($model, 'image')->fileInput() ?>
-    <?= $form->field($model, 'galery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+    <!--    --><? //= $form->field($model, 'galery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <!--    --><? //= $form->field($model, 'status')->textInput() ?>
     <?= $form->field($model, 'status')->dropDownList($statusList) ?>

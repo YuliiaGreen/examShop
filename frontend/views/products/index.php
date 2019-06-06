@@ -100,7 +100,7 @@ use yii\widgets\LinkPager;
     //    // } else {
     //    //     $('.ajax-response').html('Product added to the cart');
     //    // }
-    //})
+    })
 
 </script>
 
