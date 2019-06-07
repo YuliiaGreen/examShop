@@ -64,7 +64,7 @@ $this->params['categoriesDropdown'] = $categories
                         <a class="nav-link active" href="<?= Yii::$app->homeUrl ?>">Головна</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Про нас</a>
+                        <a class="nav-link" href="#join">Про нас</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Контакти</a>
@@ -164,7 +164,7 @@ $this->params['categoriesDropdown'] = $categories
     <div class="container-fluid padding">
         <div class="row text-center padding">
             <div class="col-12">
-                <h2>Приєднуйся</h2>
+                <h2 id="join">Приєднуйся</h2>
             </div>
             <div class="col-12 social padding">
 

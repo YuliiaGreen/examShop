@@ -31,7 +31,7 @@ use yii\widgets\DetailView;
                             <?= $item->title ?>
                         </a></h4>
                     <h6 class="card-subtitle mb-2 text-muted">Ціна: <?= $item->price ?> $</h6>
-                    <p class="card-text"><?= mb_substr($item->body, 0, 50) ?>...</p>
+                    <p class="card-text"><?= mb_substr($item->body, 0, 30) ?>...</p>
                     <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $item->id],
                         ['class' => 'btn btn-primary btn-buy']) ?>
                 </div>
@@ -68,7 +68,7 @@ use yii\widgets\DetailView;
                                     <?= $product->title ?>
                                 </a></h4>
                             <h6 class="card-subtitle mb-2 text-muted">Ціна: <?= $product->price ?> $</h6>
-                            <p class="card-text"><?= mb_substr($product->body, 0, 50) ?>...</p>
+                            <p class="card-text"><?= mb_substr($product->body, 0, 30) ?>...</p>
                             <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
                                 ['class' => 'btn btn-primary btn-buy']) ?>
                     </div>

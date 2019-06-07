@@ -34,27 +34,26 @@ $this->params['categoriesDropdown'] = $categories;
         <div class="carousel-item">
             <img src="/images/Screenshot_2019-04-10-08-13-39-829_com.mi.android.globalFileexplorer.png" alt="">
             <div class="carousel-caption">
-                <h3>Гравітаційне тренування – це заняття, в основі якого лежить взаємодія маси тіла з силою земного
+                <h3 style="">Гравітаційне тренування – це заняття, в основі якого лежить взаємодія маси тіла з силою
+                    земного
                     тяжіння.
                     <br>
-                    Через певні положення тіла в просторі, вправи, направлені на протидію та взаємодію з гравітаційною
-                    силою, ми отримуємо результат:
-                    <br>
-                    - гнучкість та корекцію амплітуди руху суглобів ; <br>
-                    - витривалість та концентрацію; <br>- силу і контроль.</h3>
+
             </div>
         </div>
 
         <div class="carousel-item">
             <img src="/images/Screenshot_2019-04-10-08-09-15-655_com.mi.android.globalFileexplorer.png" alt="">
             <div class="carousel-caption">
-                <h3>
+                <h3 style="">
                     Регулярні гравітаційні заняття: <br>
                     - покращують розумову діяльність; <br>
                     - збільшують концентрацію уваги; <br>
                     - гармонізують емоційний стан; <br>
                     - нормалізують сон.
                 </h3>
+
+
             </div>
         </div>
     </div>
@@ -88,37 +87,37 @@ $this->params['categoriesDropdown'] = $categories;
     <!--    <hr class="my-4">-->
 </div>
 <!--/three column section-->
+<!---->
+<!--<div class="container-fluid padding text-center">-->
+<!--    <h2 class="p-t-1 p-b-1" style="background-color: whitesmoke"> Нові поступлення</h2>-->
 
-<div class="container-fluid padding text-center">
-    <h2 class="p-t-1 p-b-1" style="background-color: whitesmoke"> Нові поступлення</h2>
-
-    <div class="row text-center padding align-content-between">
-        <?php
-        foreach ($new
-                 as $product): ?><?php $img = $product->getImage();
-            ?>
-            <!-- Карточка с card-img-top -->
-            <div class="card  col-sm-12 col-md-6 col-lg-4  text-center m-auto flex-wrap">
-                <!-- Изображение -->
-                <div class="parent m-auto">
-                    <img class="card-img-top h-75" src="<?= $img->getUrl('') ?>" alt="...">
-                </div>
-                <!-- Текстовый контент -->
-                <div class="card-body">
-                    <h4 class="card-title"><a class="card-link" href="/products/view?id=<?= $product->id ?>">
-                            <?= $product->title ?>
-                        </a></h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Ціна: <?= $product->price ?> $</h6>
-                    <p class="card-text"><?= mb_substr($product->body, 0, 50) ?>...</p>
-                <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
-                    ['class' => 'btn btn-primary btn-buy']) ?>
-            </div>
-            </div><!-- Конец карточки -->
-            <!--    </div>-->
-    <!--    </div>-->
-    <?php endforeach; ?>
-
-</div>
+<!--    <div class="row text-center padding align-content-between">-->
+<!--        --><?php
+//        foreach ($new
+//                 as $product): ?><!----><?php //$img = $product->getImage();
+//            ?>
+<!--             Карточка с card-img-top -->
+<!--            <div class="card  col-sm-12 col-md-6 col-lg-4  text-center m-auto flex-wrap">-->
+<!--                 Изображение -->
+<!--                <div class="parent m-auto">-->
+<!--                    <img class="card-img-top h-75" src="--><? //= $img->getUrl('') ?><!--" alt="...">-->
+<!--                </div>-->
+<!--                 Текстовый контент -->
+<!--                <div class="card-body">-->
+<!--                    <h4 class="card-title"><a class="card-link" href="/products/view?id=--><? //= $product->id ?><!--">-->
+<!--                            --><? //= $product->title ?>
+<!--                        </a></h4>-->
+<!--                    <h6 class="card-subtitle mb-2 text-muted">Ціна: --><? //= $product->price ?><!-- $</h6>-->
+<!--                    <p class="card-text">--><? //= mb_substr($product->body, 0, 30) ?><!--...</p>-->
+<!--                --><? //= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
+//                    ['class' => 'btn btn-primary btn-buy']) ?>
+<!--            </div>-->
+<!--            </div>Конец карточки -->
+<!--                </div>-->
+<!--       </div>-->
+<!--    --><?php //endforeach; ?>
+<!---->
+<!--</div>-->
 <div class="container-fluid padding text-center">
     <h2 class="p-t-1 p-b-1" style="background-color: whitesmoke"> Всі товари</h2>
 
@@ -137,7 +136,7 @@ $this->params['categoriesDropdown'] = $categories;
                             <?= $product->title ?>
                         </a></h4>
                     <h6 class="card-subtitle mb-2 text-muted">Ціна: <?= $product->price ?> $</h6>
-                    <p class="card-text"><?= mb_substr($product->body, 0, 50) ?>...</p>
+                    <p class="card-text"><?= mb_substr($product->body, 0, 30) ?>...</p>
                 <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
                     ['class' => 'btn btn-primary btn-buy']) ?>
             </div>
@@ -145,9 +144,9 @@ $this->params['categoriesDropdown'] = $categories;
             <!--    </div>-->
     <?php endforeach; ?>
 </div>
-</div>
+
 <?php //print_r($pageList);?>
-<div class="col">
+    <div class="col m-auto">
     <form action="" class="select-quantity-form">
         <select name="quantities" id="">
             <?php foreach ($pageList as $key): ?>
@@ -158,7 +157,7 @@ $this->params['categoriesDropdown'] = $categories;
             <?php endforeach; ?>
         </select>
     </form>
-
+    </div>
 </div>
 <div class="container-fluid padding text-center">
 
@@ -170,19 +169,19 @@ $this->params['categoriesDropdown'] = $categories;
     ?>
 
 </div>
-<!---->
+
 <!--<div class="col">-->
 <!--    <form action="/site" class="select-quantity-form">-->
 <!--        <select name="quantities" id="">-->
 <!--            --><?php //foreach ($pageList as $key): ?>
-<!--                <option value="--><? //= $key ?><!--"-->
-<!--                    --><?php //if ($key === $quantities) echo 'selected' ?><!--
-                   --><? //= $key ?>
+<!--                <option value="--><? //= $key ?>
+<!--                    --><?php //if ($key === $quantities) echo 'selected' ?>
+<? //= $key ?>
 <!--                </option>-->
 <!--            --><?php //endforeach; ?>
 <!--        </select>-->
 <!--    </form>-->
-<!---->
+
 <!--</div>-->
 <!--<div class="container-fluid padding text-center">-->
 <!---->
