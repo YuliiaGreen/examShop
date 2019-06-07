@@ -27,7 +27,7 @@ $img = $product->getImage();
                 </div>
                 <div class="description align-self-center text-center"><span><?= $product->body ?></span>
                 </div>
-                <div class="price align-self-center text-center"><span>Price</span><?= $product->price ?>
+                <div class="price align-self-center text-center"><span>Ціна: <?= $product->price ?> $</span>
                     </div>
             </div>
             <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
@@ -35,6 +35,4 @@ $img = $product->getImage();
         </div>
     </div>
 </div>
-
-
 

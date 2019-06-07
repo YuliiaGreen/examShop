@@ -139,9 +139,7 @@ class CartController extends \yii\web\Controller
 
     public function actionDelProduct($id)
     {
-
         $product = Products::findOne($id);
-
         $shoppingCart = ShoppingCart::findLastCart();
         if ($shoppingCart->isNewRecord) {
             return $this->redirect('/');
@@ -150,7 +148,7 @@ class CartController extends \yii\web\Controller
             //todo:: make this work for success status either
 //            return $this->asJson(['status' => 'success']); //if we need to get data with help AJAX.
 
-            Yii::$app->session->setFlash('success', 'thanks, product successfully added to your card');
+            Yii::$app->session->setFlash('success', 'Товар видалено з кошика');
 
 
             return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
@@ -160,7 +158,7 @@ class CartController extends \yii\web\Controller
         if (Yii::$app->request->isAjax) {
             return $this->asJson(['status' => 'error']);
         } else {
-            Yii::$app->session->setFlash('error', 'sorry, we can\'t add this product to your cart');
+            Yii::$app->session->setFlash('error', 'Упс, щось пiшло не так=(');
             return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
         }
 
@@ -184,7 +182,7 @@ class CartController extends \yii\web\Controller
         }
         if ($product && $shoppingCart->lessQuantityFromCart($product)) {
 
-            Yii::$app->session->setFlash('success', 'thanks, product successfully added to your card');
+            Yii::$app->session->setFlash('success', '-1!');
 
 
             return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
@@ -194,7 +192,7 @@ class CartController extends \yii\web\Controller
         if (Yii::$app->request->isAjax) {
             return $this->asJson(['status' => 'error']);
         } else {
-            Yii::$app->session->setFlash('error', 'sorry, we can\'t add this product to your cart');
+            Yii::$app->session->setFlash('error', 'Упс, щось пiшло не так=(t');
             return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
         }
     }
@@ -212,7 +210,7 @@ class CartController extends \yii\web\Controller
 
         if ($product && $shoppingCart->moreQuantityToCart($product)) {
 
-            Yii::$app->session->setFlash('success', 'thanks, product successfully added to your card');
+            Yii::$app->session->setFlash('success', '+1!');
 
             return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
 

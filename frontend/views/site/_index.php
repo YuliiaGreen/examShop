@@ -28,7 +28,51 @@ foreach ($products as $product):
     </div>
 <?php endforeach;
 ?>
+<!--        <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center m-auto flex-wrap">-->
+<!--            <div class=" ">-->
+<!--                <div class="image ">-->
+<!--                    <a href=""><img src="/images/logo.png" alt=""></a>-->
+<!--                </div>-->
+<!--                <div class="d-flex flex-column text-center">-->
+<!--                    <div class="name align-self-center  text-center">-->
+<!--                        <a href="/products/view?id=--><? //= $product->id ?><!--">-->
+<!--                            --><? //= $product->title ?>
+<!--                        </a-->
+<!--                    </div>-->
+<!--                    <div class="description align-self-center text-center"><span>--><? //= $product->body ?><!--</span>-->
+<!--                    </div>-->
+<!--                    <div class="price align-self-center text-center"><span>Price</span>--><? //= $product->price ?>
+<!--                    </div>-->
+<!--                </div>-->
+<!--                --><? //= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
+//                    ['class' => 'btn btn-success']) ?>
+<!--            </div>-->
+<!--        </div>-->
 
+
+<div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto flex-wrap">-->
+    <!--            <div class=" ">-->
+    <!--                <div class="image ">-->
+    <!--                    <a href=""><img src="/images/logo.png" alt=""></a>-->
+    <!--                </div>-->
+    <!--                <div class="d-flex flex-column text-center">-->
+    <!--                    <div class="name align-self-center  text-center">-->
+    <!--                        <a href="/products/view?id=--><? //= $product->id ?><!--">-->
+    <!--                            --><? //= $product->title ?>
+    <!--                        </a-->
+    <!--                    </div>-->
+    <!--                    <div class="description align-self-center text-center"><span>-->
+    <? //= $product->body ?><!--</span>-->
+    <!--                    </div>-->
+    <!--                    <div class="price align-self-center text-center"><span>Price</span>--><? //= $product->price ?>
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                --><? //= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
+    //                    ['class' => 'btn btn-success']) ?>
+    <!--            </div>-->
+    <!--        </div>-->
+
+</div>
 <body class="animsition">
 
 <!-- Header -->

@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
 $this->params['categoriesDropdown'] = $categories;
+
 ?>
 <div id="slides" class="carousel slide" data-ride="carousel">
     <ul class="carousel-indicators">
@@ -18,29 +19,51 @@ $this->params['categoriesDropdown'] = $categories;
     </ul>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/images/slides1.jpg" alt="">
+            <img src="/images/Screenshot_2019-04-10-08-24-33-220_com.mi.android.globalFileexplorer.png" alt="">
             <div class="carousel-caption">
-                <h1>examShop</h1>
-                <h3> description of the shop</h3>
+                <h1>Гравітацiйні практики</h1>
+                <h3>Можуть навіть діти</h3>
                 <button type="button" class="btn btn-outline-light btn-lg">
-                    BUTTON
+                    <?= \yii\helpers\Html::a('хочу спробувати', ['site/contact/']) ?>
                 </button>
-                <button type="button" class="btn btn-primary btn-lg">
-                    SIGN UP
-                </button>
+                <!--                <button type="button" class="btn btn-primary btn-lg">-->
+                <!--                    SIGN UP-->
+                <!--                </button>-->
             </div>
         </div>
         <div class="carousel-item">
-            <img src="/images/slides2.png" alt="">
+            <img src="/images/Screenshot_2019-04-10-08-13-39-829_com.mi.android.globalFileexplorer.png" alt="">
+            <div class="carousel-caption">
+                <h3>Гравітаційне тренування – це заняття, в основі якого лежить взаємодія маси тіла з силою земного
+                    тяжіння.
+                    <br>
+                    Через певні положення тіла в просторі, вправи, направлені на протидію та взаємодію з гравітаційною
+                    силою, ми отримуємо результат:
+                    <br>
+                    - гнучкість та корекцію амплітуди руху суглобів ; <br>
+                    - витривалість та концентрацію; <br>- силу і контроль.</h3>
+            </div>
         </div>
+
         <div class="carousel-item">
-            <img src="/images/slides3.png" alt="">
+            <img src="/images/Screenshot_2019-04-10-08-09-15-655_com.mi.android.globalFileexplorer.png" alt="">
+            <div class="carousel-caption">
+                <h3>
+                    Регулярні гравітаційні заняття: <br>
+                    - покращують розумову діяльність; <br>
+                    - збільшують концентрацію уваги; <br>
+                    - гармонізують емоційний стан; <br>
+                    - нормалізують сон.
+                </h3>
+            </div>
         </div>
     </div>
 </div>
 <!--three column section-->
-<div class="container-fluid padding">
-    <hr class="my-4">
+<div class="container-fluid padding text-center">
+    <!--    <hr class="my-4">-->
+    <h2 class=" align-baseline p-t-1 p-b-1" style="background-color: whitesmoke">Новини</h2>
+
     <div class="row text-center ">
         <div class="col-xs-12 col-sm-6 col-md-4 m-t-2">
             <!--            <i class="fa fa-american-sign-language-interpreting"></i>-->
@@ -62,72 +85,64 @@ $this->params['categoriesDropdown'] = $categories;
             <p>New3 Text</p>
         </div>
     </div>
-    <hr class="my-4">
+    <!--    <hr class="my-4">-->
 </div>
 <!--/three column section-->
 
 <div class="container-fluid padding text-center">
-    <h2> Нові поступлення</h2>
+    <h2 class="p-t-1 p-b-1" style="background-color: whitesmoke"> Нові поступлення</h2>
 
     <div class="row text-center padding align-content-between">
-        <?php foreach ($new
-
-        as $product): ?>
-        <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center m-auto flex-wrap">
-            <!--<div class="overflow-auto pos-absolute">-->
-            <!--<div class="row text-center padding align-content-between">-->
-            <!--    <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto ">-->
-            <div class=" ">
-                <div class="image ">
-                    <a href=""><img src="/images/logo.png" alt=""></a>
+        <?php
+        foreach ($new
+                 as $product): ?><?php $img = $product->getImage();
+            ?>
+            <!-- Карточка с card-img-top -->
+            <div class="card  col-sm-12 col-md-6 col-lg-4  text-center m-auto flex-wrap">
+                <!-- Изображение -->
+                <div class="parent m-auto">
+                    <img class="card-img-top h-75" src="<?= $img->getUrl('') ?>" alt="...">
                 </div>
-                <div class="d-flex flex-column text-center">
-                    <div class="name align-self-center  text-center">
-                        <a href="/products/view?id=<?= $product->id ?>">
+                <!-- Текстовый контент -->
+                <div class="card-body">
+                    <h4 class="card-title"><a class="card-link" href="/products/view?id=<?= $product->id ?>">
                             <?= $product->title ?>
-                        </a
-                    </div>
-                    <div class="description align-self-center text-center"><span><?= $product->body ?></span>
-                    </div>
-                    <div class="price align-self-center text-center"><span>Price</span><?= $product->price ?>
-                    </div>
-                </div>
+                        </a></h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Ціна: <?= $product->price ?> $</h6>
+                    <p class="card-text"><?= mb_substr($product->body, 0, 50) ?>...</p>
                 <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
-                    ['class' => 'btn btn-success']) ?>
+                    ['class' => 'btn btn-primary btn-buy']) ?>
             </div>
-        </div>
-    </div>
+            </div><!-- Конец карточки -->
+            <!--    </div>-->
     <!--    </div>-->
     <?php endforeach; ?>
-    <hr class="my-4">
+
 </div>
 <div class="container-fluid padding text-center">
-    <h2>Всі товари</h2>
-    <div class="row text-center padding align-content-between">
-        <?php foreach ($products
+    <h2 class="p-t-1 p-b-1" style="background-color: whitesmoke"> Всі товари</h2>
 
-        as $product): ?>
-        <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto flex-wrap">
-            <div class=" ">
-                <div class="image ">
-                    <a href=""><img src="/images/logo.png" alt=""></a>
+    <div class="row text-center padding align-content-between">
+        <?php foreach ($products as $product): ?>
+            <?php $img = $product->getImage('x300'); ?>
+            <!-- Карточка с card-img-top -->
+            <div class="card  col-sm-12 col-md-6 col-lg-4  text-center m-auto flex-wrap m-1">
+                <!-- Изображение -->
+                <div class="parent m-auto">
+                    <img class="card-img-top w-100" src="<?= $img->getUrl('') ?>" alt="...">
                 </div>
-                <div class="d-flex flex-column text-center">
-                    <div class="name align-self-center  text-center">
-                        <a href="/products/view?id=<?= $product->id ?>">
+                <!-- Текстовый контент -->
+                <div class="card-body">
+                    <h4 class="card-title"><a class="card-link" href="/products/view?id=<?= $product->id ?>">
                             <?= $product->title ?>
-                        </a
-                    </div>
-                    <div class="description align-self-center text-center"><span><?= $product->body ?></span>
-                    </div>
-                    <div class="price align-self-center text-center"><span>Price</span><?= $product->price ?>
-                    </div>
-                </div>
+                        </a></h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Ціна: <?= $product->price ?> $</h6>
+                    <p class="card-text"><?= mb_substr($product->body, 0, 50) ?>...</p>
                 <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
-                    ['class' => 'btn btn-success']) ?>
+                    ['class' => 'btn btn-primary btn-buy']) ?>
             </div>
-        </div>
-    </div>
+            </div><!-- Конец карточки -->
+            <!--    </div>-->
     <?php endforeach; ?>
 </div>
 </div>

@@ -6,7 +6,7 @@
 
 use frontend\models\ShoppingCart;
 
-$img = $cart->getImage();
+
 ?>
 <div class="container-fluid padding text-center">
     <div class="row text-center padding align-content-between">
@@ -35,6 +35,8 @@ $img = $cart->getImage();
             <th scope="col">Назва</th>
             <th scope="col">Ціна, $</th>
             <th scope="col">Кількість</th>
+            <th scope="col">Збільшити</th>
+            <th scope="col">Зменшити</th>
             <th scope="col">Сума, $</th>
             <th scope="col">Видалити</th>
         </tr>
@@ -43,15 +45,26 @@ $img = $cart->getImage();
         <?php if (!empty($cart->products)): ?>
             <?php $sum = 0;
             $i = 1;
-            foreach ($cart->products as $item):?>
+            $img = $cart->getImage();
+            foreach ($cart->products as $item):
+                $img = $item->getImage(); ?>
                 <tr>
                     <th scope="row"><?= $i ?></th>
                     <th scope="row"><a href=""><img src="<?= $img->getUrl() ?>" alt=""></a></th>
                     <td><a href="../products/view?id=<?= $item->id ?>"><?= $item->title ?></a></td>
                     <td><?= $item->price ?></td>
                     <td><?= $quantity[$item->id] ?></td>
+
+                    <td>
+                        <button><?= \yii\helpers\Html::a('+', ['cart/more-product', 'id' => $item->id]) ?></button>
+                    </td>
+                    <td>
+                        <button><?= \yii\helpers\Html::a('-', ['cart/less-product', 'id' => $item->id]) ?></button>
+                    </td>
                     <td><?= $item->price * $quantity[$item->id] ?></td>
-                    <td><?= \yii\helpers\Html::a('Видалити', ['cart/del-product', 'id' => $item->id]) ?></td>
+                    <td>
+                        <button><?= \yii\helpers\Html::a('Видалити', ['cart/del-product', 'id' => $item->id]) ?></button>
+                    </td>
                 </tr>
                 <?php
                 $sum += $item->price * $quantity[$item->id];
@@ -61,6 +74,9 @@ $img = $cart->getImage();
 
 
         <tr>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

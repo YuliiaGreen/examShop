@@ -25,27 +25,21 @@ $this->params['categoriesDropdown'] = $categories;
         <h3 class="m-auto col-12"><?= $product->title ?></h3>
         <hr>
         <?php foreach ($product->products as $item): ?>
-        <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center m-auto flex-wrap">
-            <div class=" ">
-                <div class="image ">
-                    <a href=""><img src="/images/logo.png" alt=""></a>
+            <div class="card  col-sm-12 col-md-6 col-lg-4  text-center m-auto flex-wrap m-1">
+                <div class="parent m-auto">
+                    <img class="card-img-top w-100" src="<?= $img->getUrl('') ?>" alt="...">
                 </div>
-                <div class="d-flex flex-column text-center">
-                    <div class="name align-self-center  text-center">
-                        <a href="/products/view?id=<?= $item->id ?>">
-                            <?= $item->title ?>
-                        </a
-                    </div>
-                    <div class="description align-self-center text-center"><span><?= $item->body ?></span>
-                    </div>
-                    <div class="price align-self-center text-center"><span>Price</span><?= $item->price ?>
-                    </div>
+                <!-- Текстовый контент -->
+                <div class="card-body">
+                    <h4 class="card-title"><a class="card-link" href="/products/view?id=<?= $product->id ?>">
+                            <?= $product->title ?>
+                        </a></h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Ціна: <?= $product->price ?> $</h6>
+                    <p class="card-text"><?= mb_substr($product->body, 0, 50) ?>...</p>
+                    <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $product->id],
+                        ['class' => 'btn btn-primary btn-buy']) ?>
                 </div>
-                <?= \yii\helpers\Html::a('Додати в кошик', ['cart/add-product', 'id' => $item->id],
-                    ['class' => 'btn btn-success']) ?>
             </div>
-        </div>
-    </div>
 
 <?php endforeach; ?>
 </div>

@@ -164,13 +164,14 @@ $this->params['categoriesDropdown'] = $categories
     <div class="container-fluid padding">
         <div class="row text-center padding">
             <div class="col-12">
-                <h2>JOIN</h2>
+                <h2>Приєднуйся</h2>
             </div>
             <div class="col-12 social padding">
 
-                <a href=""><i class="fab fa-youtube"></i></a>
-                <a href=""><i class="fab fa-facebook"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCWAuDWCKTplBMGYvmxOEQWg?view_as=subscriber"><i
+                            class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/gravityspaces/"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/gravityspaces?igshid=18p1qsv8kntwy"><i class="fab fa-instagram"></i></a>
                 <a href=""><i class="fab fa-telegram"></i></a>
                 <a href=""><i class="fab fa-google"></i></a>
 
@@ -209,21 +210,22 @@ $this->params['categoriesDropdown'] = $categories
             <div class="col-md-4">
                 <!--                            <img src="/images/logo.png" alt="">-->
                 <hr class="light">
-                <p> Our Hours</p>
+                <p> Робочі години</p>
                 <hr class="light">
-                <p>Monday</p>
-                <p>Tuesday</p>
-                <p>Wednesday</p>
-                <p>Thursday</p>
+                <p>Будні дні</p>
+                <p>8.00 -16.00</p>
+                <p>Субота</p>
+                <p> 10.00-16.00</p>
+
             </div>
             <div id="contact" class="col-md-4">
                 <hr class="light">
-                <p>Details</p>
+                <p>Деталі</p>
                 <hr class="light">
                 <p>+30 000 00 00</p>
                 <p>examShop@gmail.com</p>
-                <p>100 Street Name</p>
-                <p>Lutsk, Volyn region</p>
+                <p>вул. Лесі Українки, 52</p>
+                <p>Луцьк, Волинська обл.</p>
             </div>
             <div class="col-12">
                 <hr class="light">

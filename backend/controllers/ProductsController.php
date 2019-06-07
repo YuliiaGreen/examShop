@@ -91,8 +91,8 @@ class ProductsController extends Controller
                     $model->upload();
                 }
                 unset($model->image);
-                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
-                $model->uploadGalery();
+//                $model->galery[] = UploadedFile::getInstances($model, 'galery[]');
+//                $model->uploadGalery();
                 Yii::$app->session->setFlash('success', 'Товар успішно створнений');
                 return $this->redirect(['view', 'id' => $model->id]);
             }

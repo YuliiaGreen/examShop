@@ -90,10 +90,10 @@ class SiteController extends Controller
         $this->view->title = 'examShop';
         $categories = CategoriesSearch::getParentCategories();
         $new = Products::find()->where(['is', 'deleted_at', null])
-            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_DESC])->limit(3)->all();
+            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SCANDIR_SORT_DESCENDING])->limit(3)->all();
 
         $products = Products::find()->where(['is', 'deleted_at', null])
-            ->andWhere(['=', 'status', '1']);
+            ->andWhere(['=', 'status', '1'])->orderBy(['created_at' => SORT_ASC]);
         $page = Yii::$app->request->get('page') ?? 1;
         $quantities = $this->pageList[Yii::$app->request->get('quantities') ?? self::ITEM_QUANTITY]
             ?? self::ITEM_QUANTITY;
@@ -208,6 +208,26 @@ class SiteController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+
+    /**
+     * Sends confirmation email to user
+     * @param User $user user model to with email should be send
+     * @return bool whether the email was sent
+     */
+    protected function sendEmail($user)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($this->email)
+            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->send();
     }
 
     /**

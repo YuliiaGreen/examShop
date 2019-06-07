@@ -156,7 +156,17 @@ footer {
 }
 
 .pag {
-    background-color: #dbe0ff;
+    background-color: #00bbec;
+    color: black;
+}
+
+.pag:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.pag > a {
+    font-size: 18px;
     color: black;
 }
 main {
@@ -164,7 +174,7 @@ main {
 }
 
 .img {
-    border-radius: 50%;
+    border-radius: 10%;
     height: 150px;
     width: auto;
     max-width: 150px;
@@ -177,22 +187,99 @@ main {
     max-width: 150px;
 }
 
+.card {
+    /*box-sizing: border-box;*/
+}
+
+.card:hover {
+    background-color: #3f3f3f;
+    color: whitesmoke;
+}
+
+.btn-buy {
+    background-color: #3f3f3f;
+}
+
+.card-link {
+    color: #00bbec;
+}
+
+.parent {
+    /*height: 0;*/
+    /*padding-top: 130%;*/
+    /*position: relative;*/
+    /*display: block;*/
+    background-size: cover;
+    width: 220px;
+    height: 220px;
+    overflow: hidden;
+}
+
+.paren > image {
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    /*max-height: 100%;*/
+    /*max-width: 100%;*/
+    height: auto;
+    width: auto;
+    max-width: 100%;
+}
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
 }
 
 @media (max-width: 768px) {
+    html, body {
+        font-size: 14px;
+    }
 
+    .carousel-caption {
+        font-size: 80%;
+        top: 40%;
+
+    }
+
+    .parent {
+        width: 330px;
+        /*height:auto;*/
+        overflow: hidden;
+    }
 }
 
 @media (max-width: 576px) {
+    html, body {
+        font-size: 12px;
+    }
 
+    .parent {
+        width: 200px;
+        height: auto;
+        overflow: hidden;
+    }
+
+    .cart {
+        width: 100%;
+    }
+
+    .carousel-caption {
+        font-size: 50%;
+        top: 30%;
+    }
+
+    header {
+        height: 30px;
+    }
+
+    /*.nav>a>img{*/
+    /*    display: none;*/
+    /*}*/
 }
 
 @media (min-width: 1200px) {
     html, body {
-
         font-size: 16px;
     }
 
@@ -226,7 +313,7 @@ figure {
 }
 
 #fixed {
-    background-image: url('img/mac.png');
+    /*background-image: url('img/mac.png');*/
     position: fixed;
     display: block;
     top: 0;

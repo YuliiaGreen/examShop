@@ -212,6 +212,12 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
+//    public function validatephoneNomber($phoneNomber)
+//    {
+//        $pattern = "/^\+380\d{3}\d{2}\d{2}\d{2}$/";
+//        if(preg_match($pattern, "+380635290289")) echo "Валиден";
+//        else echo "Не валиден";
+//    }
     /**
      * Generates password hash from password and sets it to the model
      *
