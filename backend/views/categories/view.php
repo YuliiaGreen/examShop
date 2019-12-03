@@ -48,7 +48,7 @@ $img = $model->getImage(); ?>
 
 <div class="col container-fluid padding text-center">
     <table class="table col-10 m-auto">
-        <a href=""><img src="<?= $img->getUrl() ?>" alt=""></a>
+<!--        <a href=""><img src="--><?//= $img->getUrl() ?><!--" alt=""></a>-->
         <thead class="thead-dark">
         <tr>
             <th scope="col">id</th>

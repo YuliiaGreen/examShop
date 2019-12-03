@@ -103,7 +103,7 @@ $this->params['categoriesDropdown'] = $categories
                             <a class="nav-link" href="<?= Yii::$app->homeUrl ?>site/signup">Реєстрація</a>
                         </li>
                     <?php endif; ?>
-
+                    <!--cart-->
                     <li class="nav-item">
                         <a class="nav-link" href="<?= Yii::$app->homeUrl ?>cart"><img style="height: 40px"
                                                                                       class="img-fluid"
@@ -113,7 +113,7 @@ $this->params['categoriesDropdown'] = $categories
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="<?= Yii::$app->homeUrl ?>user/update"><img
+                           href="<?= Yii::$app->homeUrl ?>site/personal-data"><img
                                     style="height: 40px"
                                     class="img-fluid"
                                     alt="Responsive image"

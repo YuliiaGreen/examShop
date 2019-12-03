@@ -259,15 +259,11 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getPhoneNumber()
     {
-//        $user = User::findOne($id);
-//        return $user->phoneNomber;
         return $this->phoneNomber;
     }
 
     public function getSex()
     {
-//        $user = User::findOne($id);
-//        return $user->phoneNomber;
         return $this->sex;
     }
 

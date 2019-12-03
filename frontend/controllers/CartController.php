@@ -73,8 +73,8 @@ class CartController extends \yii\web\Controller
         if (Yii::$app->user->getIsGuest()) {
             Yii::$app->session->setFlash('error',
                 'only for register user. enter or '
-                . Html::a('register', 'site/signup'));
-            return Yii::$app->response->redirect('site/login');
+                . Html::a('register', '/site/signup'));
+            return Yii::$app->response->redirect('/site/login');
         } else {
             $cart = ShoppingCart::findLastCart();
 //            print_r($cart);
