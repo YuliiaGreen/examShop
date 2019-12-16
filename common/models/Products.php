@@ -128,7 +128,7 @@ class Products extends \yii\db\ActiveRecord
 
     public function getRelatedAttributesValues()
     {
-        return Attributes::find()->with('attributesValues')->all();
+//        return Attributes::find()->with('attributesValues')->all();
 //       return Attributes::find()->with('attributesValues')->all();
     }
 
